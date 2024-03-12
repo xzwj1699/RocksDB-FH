@@ -1,0 +1,458 @@
+==================Workload=================
+workloads/workloadc.spec
+recordcount=100000000
+operationcount=200000000
+workload=com.yahoo.ycsb.workloads.CoreWorkload
+readallfields=true
+readproportion=1
+updateproportion=0
+scanproportion=0
+insertproportion=0
+requestdistribution=zipfian
+fieldlength=1024
+fieldcount=1
+readallfields=true
+==========================================
+zipfian const value: 0.990000
+dbname: rocksdb
+--------------memory usage----------------
+              total        used        free      shared  buff/cache   available
+Mem:          235Gi       6.6Gi        99Gi       4.0Mi       129Gi       227Gi
+Swap:         8.0Gi       3.0Mi       8.0Gi
+------------------------------------------
+Running test for experiment
+loading workload (50000001)...
+10%...20%...30%...40%...50%...60%...70%...80%...90%...
+loading workload finished in 53.498 s
+Start experiment warmup stage
+Start warmup (30000000)...
+warmup start: 2024/03/12-18:53:25.781238
+client coreid: 0
+client coreid: 1
+client coreid: 2
+client coreid: 3
+Starting a new RocksDB worker thread, thread id: 0
+starting requests...
+Starting a new RocksDB worker thread, thread id: client coreid: 4
+3
+Starting a new RocksDB worker thread, thread id: 2
+Starting a new RocksDB worker thread, thread id: 1
+client coreid: 5
+Starting a new RocksDB worker thread, thread id: 5
+Starting a new RocksDB worker thread, thread id: 4
+client coreid: 6
+Starting a new RocksDB worker thread, thread id: 6
+client coreid: 7
+client coreid: 8
+client coreid: 9
+Starting a new RocksDB worker thread, thread id: 7
+Starting a new RocksDB worker thread, thread id: 9
+Starting a new RocksDB worker thread, thread id: 8
+client coreid: 10
+Starting a new RocksDB worker thread, thread id: 10
+client coreid: 11
+client coreid: 12
+client coreid: 13
+Starting a new RocksDB worker thread, thread id: 12
+Starting a new RocksDB worker thread, thread id: 11
+Starting a new RocksDB worker thread, thread id: 13
+client coreid: 14
+Starting a new RocksDB worker thread, thread id: 14
+client coreid: 15
+Starting a new RocksDB worker thread, thread id: 15
+client coreid: 16
+Starting a new RocksDB worker thread, thread id: 16
+client coreid: 17
+client coreid: 18
+client coreid: 19
+Starting a new RocksDB worker thread, thread id: 19
+Starting a new RocksDB worker thread, thread id: 18
+Starting a new RocksDB worker thread, thread id: 17
+client coreid: 20
+client coreid: 21
+Starting a new RocksDB worker thread, thread id: 20
+Starting a new RocksDB worker thread, thread id: 21
+client coreid: 22
+client coreid: 23
+client coreid: 24
+Starting a new RocksDB worker thread, thread id: 23
+client coreid: 25
+Starting a new RocksDB worker thread, thread id: 25
+Starting a new RocksDB worker thread, thread id: 22
+client coreid: 26
+client coreid: 27
+client coreid: 28
+client coreid: 29
+Starting a new RocksDB worker thread, thread id: 26
+Starting a new RocksDB worker thread, thread id: 28
+Starting a new RocksDB worker thread, thread id: 29
+client coreid: 30
+Starting a new RocksDB worker thread, thread id: 30
+Starting a new RocksDB worker thread, thread id: 24
+Starting a new RocksDB worker thread, thread id: 27
+client coreid: 31
+client coreid: 32
+Starting a new RocksDB worker thread, thread id: 31
+Starting a new RocksDB worker thread, thread id: 32
+client coreid: 33
+Starting a new RocksDB worker thread, thread id: 33
+client coreid: 34
+Starting a new RocksDB worker thread, thread id: 34
+client coreid: 35
+client coreid: 36
+client coreid: 37
+Starting a new RocksDB worker thread, thread id: 35
+client coreid: 38
+client coreid: 39
+Starting a new RocksDB worker thread, thread id: 37
+Starting a new RocksDB worker thread, thread id: 38
+Starting a new RocksDB worker thread, thread id: 36
+client coreid: 40
+Starting a new RocksDB worker thread, thread id: 39
+client coreid: 41
+client coreid: 42
+client coreid: 43
+client coreid: 44
+Starting a new RocksDB worker thread, thread id: 40
+Starting a new RocksDB worker thread, thread id: 42
+Starting a new RocksDB worker thread, thread id: 43
+Starting a new RocksDB worker thread, thread id: 44
+client coreid: 45
+client coreid: 46
+client coreid: 47
+Starting a new RocksDB worker thread, thread id: 41
+client coreid: 48
+Starting a new RocksDB worker thread, thread id: 46
+Starting a new RocksDB worker thread, thread id: 45
+Starting a new RocksDB worker thread, thread id: 47
+Starting a new RocksDB worker thread, thread id: 48
+client coreid: 49
+client coreid: 50
+Starting a new RocksDB worker thread, thread id: 49
+Starting a new RocksDB worker thread, thread id: 50
+client coreid: 51
+client coreid: 52
+Starting a new RocksDB worker thread, thread id: 51
+client coreid: 53
+Starting a new RocksDB worker thread, thread id: 53
+client coreid: 54
+Starting a new RocksDB worker thread, thread id: 52
+client coreid: 56
+client coreid: 55
+Starting a new RocksDB worker thread, thread id: 54
+Starting a new RocksDB worker thread, thread id: 56
+client coreid: 57
+Starting a new RocksDB worker thread, thread id: 55
+client coreid: 58
+client coreid: 59
+Starting a new RocksDB worker thread, thread id: 58
+client coreid: 60
+Starting a new RocksDB worker thread, thread id: 57
+client coreid: 61
+Starting a new RocksDB worker thread, thread id: 59
+client coreid: 62
+Starting a new RocksDB worker thread, thread id: 61
+client coreid: 63
+Starting a new RocksDB worker thread, thread id: 62
+Starting a new RocksDB worker thread, thread id: 60
+Starting a new RocksDB worker thread, thread id: 63
+Finish experiment warmup stage
+warmup finish: 2024/03/12-18:55:01.459190
+Warmup complete 30000000 requests in 95.678 seconds.
+read num: 15000000, read avg latency: 168.851 us, read median latency: 103.072 us
+read P999: 1560.336 us, P99: 824.880 us, P95: 485.470 us, P90: 333.904 us, P75: 146.720 us
+update num: 0, update avg latency: 0 us, update median latency: 0 us
+update P999: 0 us, P99: 0 us, P95: 0 us, P90: 0 us, P75: 0 us
+Work latency: 168.851 us
+Work IOPS: 313.552 K (end to end latency: 204.113 us)
+Work median latency: 103.072 us
+Work P999: 1560.336us, P99: 824.880us, P95: 485.470us, P90: 333.904us, P75: 146.720us
+Block read time: 77.108 us (count: 15000000)
+Block avg read time: 140.797 us (count: 8214756)
+block cache hit ratio: 0.911 (hit: 84465999, miss: 8214756)
+block cache add failures: 0
+block cache index hit ratio: -nan (hit: 0, miss: 0)
+block cache filter hit ratio: -nan (hit: 0, miss: 0)
+block cache data hit ratio: 0.911 (hit: 84465999, miss: 8214756)
+block cache bytes read: 366053815072, write: 35562493472
+memtable hit ratio: 0.000 (hit: 0, miss: 30000000)
+client2 have monitor!
+start time: 2024/03/12-18:55:03.650276
+client coreid: 0
+client coreid: 1
+client coreid: 3
+client coreid: 2
+client coreid: 4
+client coreid: 5
+Starting a new RocksDB worker thread, thread id: 3
+client coreid: 6
+Starting a new RocksDB worker thread, thread id: 1
+Starting a new RocksDB worker thread, thread id: 0
+starting requests...
+client coreid: 7
+client coreid: 8
+Starting a new RocksDB worker thread, thread id: 4
+Starting a new RocksDB worker thread, thread id: 6
+Starting a new RocksDB worker thread, thread id: 2
+client coreid: 9
+Starting a new RocksDB worker thread, thread id: 7
+Starting a new RocksDB worker thread, thread id: 8
+Starting a new RocksDB worker thread, thread id: 5
+client coreid: 10
+client coreid: 11
+Starting a new RocksDB worker thread, thread id: 10client coreid: 12
+
+client coreid: 13
+Starting a new RocksDB worker thread, thread id: 9
+client coreid: 14
+client coreid: 15
+Starting a new RocksDB worker thread, thread id: 13
+client coreid: 16
+Starting a new RocksDB worker thread, thread id: 11
+client coreid: 17
+client coreid: 18
+Starting a new RocksDB worker thread, thread id: 15
+client coreid: 19
+Starting a new RocksDB worker thread, thread id: 16
+Starting a new RocksDB worker thread, thread id: 19
+Starting a new RocksDB worker thread, thread id: 14
+Starting a new RocksDB worker thread, thread id: 17
+Starting a new RocksDB worker thread, thread id: 12
+Starting a new RocksDB worker thread, thread id: 18
+client coreid: 20
+client coreid: 21
+client coreid: 23
+client coreid: 22
+client coreid: 24
+client coreid: 25
+client coreid: 26
+Starting a new RocksDB worker thread, thread id: 22
+Starting a new RocksDB worker thread, thread id: 20
+Starting a new RocksDB worker thread, thread id: 21
+Starting a new RocksDB worker thread, thread id: 25
+Starting a new RocksDB worker thread, thread id: 26
+client coreid: 27
+Starting a new RocksDB worker thread, thread id: 23
+client coreid: 28
+client coreid: 29
+Starting a new RocksDB worker thread, thread id: 24
+Starting a new RocksDB worker thread, thread id: 27
+client coreid: 30
+Starting a new RocksDB worker thread, thread id: 29
+client coreid: 31
+Starting a new RocksDB worker thread, thread id: 28
+Starting a new RocksDB worker thread, thread id: 30
+client coreid: 32
+Starting a new RocksDB worker thread, thread id: 31
+client coreid: 33
+client coreid: 34
+client coreid: 35
+Starting a new RocksDB worker thread, thread id: 32
+client coreid: 36
+Starting a new RocksDB worker thread, thread id: 33
+client coreid: 37
+Starting a new RocksDB worker thread, thread id: 34
+Starting a new RocksDB worker thread, thread id: 36
+client coreid: 38
+Starting a new RocksDB worker thread, thread id: 35
+client coreid: 39
+Starting a new RocksDB worker thread, thread id: 37
+Starting a new RocksDB worker thread, thread id: 38
+client coreid: 40
+Starting a new RocksDB worker thread, thread id: 39
+client coreid: 41
+client coreid: 42
+client coreid: 43
+Starting a new RocksDB worker thread, thread id: 40
+Starting a new RocksDB worker thread, thread id: 42
+Starting a new RocksDB worker thread, thread id: 43
+client coreid: 44
+client coreid: 45
+client coreid: 46
+Starting a new RocksDB worker thread, thread id: 41
+client coreid: 47
+client coreid: 48
+client coreid: 49
+client coreid: 50
+Starting a new RocksDB worker thread, thread id: 46
+Starting a new RocksDB worker thread, thread id: 47
+client coreid: 51
+Starting a new RocksDB worker thread, thread id: 44
+Starting a new RocksDB worker thread, thread id: 49
+Starting a new RocksDB worker thread, thread id: 45
+client coreid: 52
+Starting a new RocksDB worker thread, thread id: 48
+client coreid: 53
+Starting a new RocksDB worker thread, thread id: 50
+Starting a new RocksDB worker thread, thread id: 51
+client coreid: 54
+Starting a new RocksDB worker thread, thread id: 52
+Starting a new RocksDB worker thread, thread id: 53
+client coreid: 55
+client coreid: 56
+Starting a new RocksDB worker thread, thread id: 55
+client coreid: 57
+Starting a new RocksDB worker thread, thread id: 54
+client coreid: 58
+Starting a new RocksDB worker thread, thread id: 56
+Starting a new RocksDB worker thread, thread id: 57
+client coreid: 59
+client coreid: 60
+Starting a new RocksDB worker thread, thread id: 59
+client coreid: 61
+Starting a new RocksDB worker thread, thread id: 58
+client coreid: 62
+Starting a new RocksDB worker thread, thread id: 61
+Starting a new RocksDB worker thread, thread id: 60
+client coreid: 63
+Starting a new RocksDB worker thread, thread id: 63
+Starting a new RocksDB worker thread, thread id: 62
+push monitor!
+client coreid: 120
+end time: 2024/03/12-18:55:59.051161
+
+
+** Compaction Stats [default] **
+Level    Files   Size     Score Read(GB)  Rn(GB) Rnp1(GB) Write(GB) Wnew(GB) Moved(GB) W-Amp Rd(MB/s) Wr(MB/s) Comp(sec) CompMergeCPU(sec) Comp(cnt) Avg(sec) KeyIn KeyDrop Rblob(GB) Wblob(GB)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  L3      3/0   248.50 MB   1.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+  L4     17/0   818.79 MB   0.9      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+  L5    166/0    8.85 GB   1.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+  L6   1549/0   88.85 GB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+ Sum   1735/0   98.74 GB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+ Int      0/0    0.00 KB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+
+** Compaction Stats [default] **
+Priority    Files   Size     Score Read(GB)  Rn(GB) Rnp1(GB) Write(GB) Wnew(GB) Moved(GB) W-Amp Rd(MB/s) Wr(MB/s) Comp(sec) CompMergeCPU(sec) Comp(cnt) Avg(sec) KeyIn KeyDrop Rblob(GB) Wblob(GB)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Blob file count: 0, total size: 0.0 GB, garbage size: 0.0 GB, space amp: 0.0
+
+Uptime(secs): 55.4 total, 55.4 interval
+Flush(GB): cumulative 0.000, interval 0.000
+AddFile(GB): cumulative 0.000, interval 0.000
+AddFile(Total Files): cumulative 0, interval 0
+AddFile(L0 Files): cumulative 0, interval 0
+AddFile(Keys): cumulative 0, interval 0
+Cumulative compaction: 0.00 GB write, 0.00 MB/s write, 0.00 GB read, 0.00 MB/s read, 0.0 seconds
+Interval compaction: 0.00 GB write, 0.00 MB/s write, 0.00 GB read, 0.00 MB/s read, 0.0 seconds
+Estimated pending compaction bytes: 0
+Write Stall (count): cf-l0-file-count-limit-delays-with-ongoing-compaction: 0, cf-l0-file-count-limit-stops-with-ongoing-compaction: 0, l0-file-count-limit-delays: 0, l0-file-count-limit-stops: 0, memtable-limit-delays: 0, memtable-limit-stops: 0, pending-compaction-bytes-delays: 0, pending-compaction-bytes-stops: 0, total-delays: 0, total-stops: 0
+Block cache LRUCache@0x5604276290d0#239589 capacity: 30.00 GB seed: 456922610 usage: 0.09 KB table_size: 256 occupancy: 1 collections: 1 last_copies: 0 last_secs: 0.000247 secs_since: 206
+Block cache entry stats(count,size,portion): Misc(1,0.00 KB,0%)
+
+** File Read Latency Histogram By Level [default] **
+** Level 3 read latency histogram (micros):
+Count: 250 Average: 111.6720  StdDev: 28.73
+Min: 71  Median: 109.0286  Max: 237
+Percentiles: P50: 109.03 P75: 141.59 P99: 227.78 P99.9: 237.00 P99.99: 237.00
+------------------------------------------------------
+(      51,      76 ]       23   9.200%   9.200% ##
+(      76,     110 ]      105  42.000%  51.200% ########
+(     110,     170 ]      113  45.200%  96.400% #########
+(     170,     250 ]        9   3.600% 100.000% #
+
+** Level 4 read latency histogram (micros):
+Count: 2221 Average: 113.6164  StdDev: 33.15
+Min: 65  Median: 108.9397  Max: 468
+Percentiles: P50: 108.94 P75: 143.17 P99: 238.44 P99.9: 327.09 P99.99: 468.00
+------------------------------------------------------
+(      51,      76 ]      194   8.735%   8.735% ##
+(      76,     110 ]      946  42.593%  51.328% #########
+(     110,     170 ]      951  42.819%  94.147% #########
+(     170,     250 ]      126   5.673%  99.820% #
+(     250,     380 ]        3   0.135%  99.955% 
+(     380,     580 ]        1   0.045% 100.000% 
+
+** Level 5 read latency histogram (micros):
+Count: 354937 Average: 114.6912  StdDev: 34.12
+Min: 54  Median: 108.8968  Max: 3253
+Percentiles: P50: 108.90 P75: 143.10 P99: 239.33 P99.9: 317.19 P99.99: 357.09
+------------------------------------------------------
+(      51,      76 ]    23886   6.730%   6.730% #
+(      76,     110 ]   158733  44.721%  51.451% #########
+(     110,     170 ]   151507  42.686%  94.137% #########
+(     170,     250 ]    19918   5.612%  99.748% #
+(     250,     380 ]     1041   0.293% 100.042% 
+(     380,     580 ]       61   0.017% 100.059% 
+(     580,     870 ]       16   0.005% 100.063% 
+(     870,    1300 ]        2   0.001% 100.064% 
+(    1900,    2900 ]        3   0.001% 100.065% 
+(    2900,    4400 ]        3   0.001% 100.066% 
+
+** Level 6 read latency histogram (micros):
+Count: 2981317 Average: 114.0016  StdDev: 36.36
+Min: 59  Median: 108.5531  Max: 6211
+Percentiles: P50: 108.55 P75: 142.35 P99: 231.48 P99.9: 244.45 P99.99: 245.74
+------------------------------------------------------
+(      51,      76 ]   212519   7.128%   7.128% #
+(      76,     110 ]  1334949  44.777%  51.906% #########
+(     110,     170 ]  1276842  42.828%  94.734% #########
+(     170,     250 ]   165513   5.552% 100.285% #
+(     250,     380 ]     8999   0.302% 100.587% 
+(     380,     580 ]      558   0.019% 100.606% 
+(     580,     870 ]       99   0.003% 100.609% 
+(     870,    1300 ]       15   0.001% 100.610% 
+(    1300,    1900 ]       14   0.000% 100.610% 
+(    1900,    2900 ]       17   0.001% 100.611% 
+(    2900,    4400 ]       22   0.001% 100.611% 
+(    4400,    6600 ]        3   0.000% 100.612% 
+
+
+** DB Stats **
+Uptime(secs): 55.4 total, 55.4 interval
+Cumulative writes: 0 writes, 0 keys, 0 commit groups, 0.0 writes per commit group, ingest: 0.00 GB, 0.00 MB/s
+Cumulative WAL: 0 writes, 0 syncs, 0.00 writes per sync, written: 0.00 GB, 0.00 MB/s
+Cumulative stall: 00:00:0.000 H:M:S, 0.0 percent
+Interval writes: 0 writes, 0 keys, 0 commit groups, 0.0 writes per commit group, ingest: 0.00 MB, 0.00 MB/s
+Interval WAL: 0 writes, 0 syncs, 0.00 writes per sync, written: 0.00 GB, 0.00 MB/s
+Interval stall: 00:00:0.000 H:M:S, 0.0 percent
+Write Stall (count): write-buffer-manager-limit-stops: 0
+
+==================================================================
+-----------configuration------------
+WAL: 1, fsync: 1
+Data: /home/spdk/p4510/FH_Rocksdb_Data/data
+WAL: /home/spdk/p4510/FH_Rocksdb_Data/log
+Max_write_buffer_number: 4
+Max_background_jobs: 8
+High-priority backgd threds: 2
+Low-priority backgd threds: 6
+Max_subcompactions: 1
+Write_buffer_size: 1.000 GB
+-------------------------------------
+write done by self: 0
+WAL sync num: 0
+WAL write: 0.000 GB
+compaction read: 0.000 GB, compaction write: 0.000 GB
+flush write: 0.000 GB
+flush time: 0.000 s
+WAL sync time per request: 0.000 us
+WAL sync time per sync: -nan us
+Wait time: 0.000 us
+Complete wait time: 0.000 us
+Write delay time: 0.000 us
+Write memtable time: 0.000
+Finish 20000000 requests in 55.401 seconds.
+read num: 10000000, read avg latency: 140.586 us, read median latency: 110.316 us
+read P999: 602.859 us, P99: 451.396 us, P95: 324.473 us, P90: 274.017 us, P75: 151.865 us
+update num: 0, update avg latency: 0 us, update median latency: 0 us
+update P999: 0 us, P99: 0 us, P95: 0 us, P90: 0 us, P75: 0 us
+Work latency: 140.586 us
+Work IOPS: 361.005 K (end to end latency: 177.283 us)
+Work median latency: 110.316 us
+Work P999: 602.859us, P99: 451.396us, P95: 324.473us, P90: 274.017us, P75: 151.865us
+Stall: 0.000 us
+Stall rate: 0.000 
+Block read time: 39.999 us (count: 10000000)
+Block avg read time: 119.060 us (count: 3359586)
+block cache hit ratio: 0.946 (hit: 58432247, miss: 3359586)
+block cache add failures: 0
+block cache index hit ratio: -nan (hit: 0, miss: 0)
+block cache filter hit ratio: -nan (hit: 0, miss: 0)
+block cache data hit ratio: 0.946 (hit: 58432247, miss: 3359586)
+block cache bytes read: 253225661696, write: 14542340112
+memtable hit ratio: 0.000 (hit: 0, miss: 20000000)
+submit_time: 0.000
+==================================================================
+Finish experiment

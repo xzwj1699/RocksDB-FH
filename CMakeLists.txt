@@ -624,6 +624,7 @@ set(SOURCES
         cache/clock_cache.cc
         cache/compressed_secondary_cache.cc
         cache/lru_cache.cc
+        cache/fh_lru_cache.cc
         cache/secondary_cache.cc
         cache/secondary_cache_adapter.cc
         cache/sharded_cache.cc
@@ -1597,3 +1598,5 @@ option(WITH_BENCHMARK "build benchmark tests" OFF)
 if(WITH_BENCHMARK)
   add_subdirectory(${PROJECT_SOURCE_DIR}/microbench/)
 endif()
+
+add_subdirectory(ycsb)

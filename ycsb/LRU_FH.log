@@ -1,0 +1,2019 @@
+==================Workload=================
+workloads/workloadc.spec
+recordcount=100000000
+operationcount=200000000
+workload=com.yahoo.ycsb.workloads.CoreWorkload
+readallfields=true
+readproportion=1
+updateproportion=0
+scanproportion=0
+insertproportion=0
+requestdistribution=zipfian
+fieldlength=1024
+fieldcount=1
+readallfields=true
+==========================================
+zipfian const value: 0.990000
+Large Granularity: 4000
+QUERY_INTERVAL: 0.50 s
+WAIT_DYNAMIC_SLEEP_INTERVAL_US: 3.00 s
+dbname: rocksdb
+--------------memory usage----------------
+              total        used        free      shared  buff/cache   available
+Mem:          235Gi       6.9Gi       102Gi       4.0Mi       126Gi       227Gi
+Swap:         8.0Gi       3.0Mi       8.0Gi
+------------------------------------------
+Running test for experiment
+loading workload (50000001)...
+10%...(shard 0) miss ratio = 1.10000 -> 1.00000
+cache is stable
+miss ratio > 0.55, miss ratio: 1.000000
+20%...30%...(shard 0) miss ratio = 1.10000 -> 1.00000
+cache is stable
+miss ratio > 0.55, miss ratio: 1.000000
+40%...50%...(shard 0) miss ratio = 1.10000 -> 1.00000
+cache is stable
+miss ratio > 0.55, miss ratio: 1.000000
+60%...70%...(shard 0) miss ratio = 1.10000 -> 1.00000
+cache is stable
+miss ratio > 0.55, miss ratio: 1.000000
+80%...90%...(shard 0) miss ratio = 1.10000 -> 1.00000
+cache is stable
+miss ratio > 0.55, miss ratio: 1.000000
+
+loading workload finished in 52.692 s
+Start experiment warmup stage
+Start warmup (30000000)...
+warmup start: 2024/03/12-20:07:31.576447
+client coreid: 0
+client coreid: 2
+client coreid: 1
+Starting a new RocksDB worker thread, thread id: 0
+starting requests...
+client coreid: 3
+client coreid: 4
+Starting a new RocksDB worker thread, thread id: 4
+client coreid: 5
+Starting a new RocksDB worker thread, thread id: 1
+Starting a new RocksDB worker thread, thread id: 3
+Starting a new RocksDB worker thread, thread id: 2
+Starting a new RocksDB worker thread, thread id: client coreid: 6
+5
+Starting a new RocksDB worker thread, thread id: 6
+client coreid: 7
+client coreid: 8
+client coreid: 9
+Starting a new RocksDB worker thread, thread id: 8
+Starting a new RocksDB worker thread, thread id: 7
+Starting a new RocksDB worker thread, thread id: 9
+client coreid: 10
+Starting a new RocksDB worker thread, thread id: client coreid: 11
+10
+client coreid: 12
+client coreid: 13
+Starting a new RocksDB worker thread, thread id: 11
+Starting a new RocksDB worker thread, thread id: 12
+client coreid: 14
+client coreid: 15
+Starting a new RocksDB worker thread, thread id: 13
+Starting a new RocksDB worker thread, thread id: 15
+Starting a new RocksDB worker thread, thread id: 14
+client coreid: 16
+Starting a new RocksDB worker thread, thread id: 16
+client coreid: 17
+client coreid: 18
+Starting a new RocksDB worker thread, thread id: 17
+client coreid: 19
+client coreid: 20
+client coreid: 21
+Starting a new RocksDB worker thread, thread id: 21
+client coreid: 22
+Starting a new RocksDB worker thread, thread id: 18
+Starting a new RocksDB worker thread, thread id: 20
+Starting a new RocksDB worker thread, thread id: 19
+client coreid: 23
+Starting a new RocksDB worker thread, thread id: 22
+Starting a new RocksDB worker thread, thread id: 23
+client coreid: 24
+client coreid: 25
+Starting a new RocksDB worker thread, thread id: 24
+client coreid: 26
+Starting a new RocksDB worker thread, thread id: 25
+client coreid: 27
+client coreid: 28
+Starting a new RocksDB worker thread, thread id: 27
+client coreid: 29
+Starting a new RocksDB worker thread, thread id: 26
+Starting a new RocksDB worker thread, thread id: 29
+Starting a new RocksDB worker thread, thread id: 28
+client coreid: 30
+client coreid: 31
+Starting a new RocksDB worker thread, thread id: 31
+Starting a new RocksDB worker thread, thread id: 30
+client coreid: 32
+client coreid: 33
+client coreid: 34
+Starting a new RocksDB worker thread, thread id: 32
+Starting a new RocksDB worker thread, thread id: 34
+client coreid: 35
+Starting a new RocksDB worker thread, thread id: 35
+Starting a new RocksDB worker thread, thread id: 33
+client coreid: 36
+client coreid: 37
+client coreid: 38
+Starting a new RocksDB worker thread, thread id: 37
+client coreid: 39
+Starting a new RocksDB worker thread, thread id: 36
+Starting a new RocksDB worker thread, thread id: 38
+Starting a new RocksDB worker thread, thread id: 39
+client coreid: 40
+client coreid: 41
+client coreid: 42
+Starting a new RocksDB worker thread, thread id: 41
+client coreid: 43
+Starting a new RocksDB worker thread, thread id: 40
+client coreid: 44
+client coreid: 45
+Starting a new RocksDB worker thread, thread id: 43
+Starting a new RocksDB worker thread, thread id: 42
+Starting a new RocksDB worker thread, thread id: 44
+Starting a new RocksDB worker thread, thread id: 45
+client coreid: 46
+client coreid: 47
+Starting a new RocksDB worker thread, thread id: 46
+Starting a new RocksDB worker thread, thread id: 47
+client coreid: 48
+client coreid: 49
+Starting a new RocksDB worker thread, thread id: 48
+Starting a new RocksDB worker thread, thread id: 49
+client coreid: 50
+Starting a new RocksDB worker thread, thread id: 50
+client coreid: 51
+Starting a new RocksDB worker thread, thread id: 51
+client coreid: 52
+client coreid: 53
+client coreid: 54
+Starting a new RocksDB worker thread, thread id: 53
+client coreid: 55
+Starting a new RocksDB worker thread, thread id: 54
+client coreid: 56
+Starting a new RocksDB worker thread, thread id: 52
+Starting a new RocksDB worker thread, thread id: 56
+client coreid: 57
+client coreid: 58
+Starting a new RocksDB worker thread, thread id: 58
+Starting a new RocksDB worker thread, thread id: 55
+client coreid: 59
+client coreid: 60
+Starting a new RocksDB worker thread, thread id: 60
+Starting a new RocksDB worker thread, thread id: 59
+Starting a new RocksDB worker thread, thread id: 57
+client coreid: 61
+Starting a new RocksDB worker thread, thread id: 61
+client coreid: 62
+client coreid: 63
+Starting a new RocksDB worker thread, thread id: 62
+Starting a new RocksDB worker thread, thread id: 63
+(shard 0) miss ratio = 1.10000 -> 0.28667 with usage_: 290624360
+(shard 0) miss ratio = 0.28667 -> 0.22654 with usage_: 329281328
+(shard 0) miss ratio = 0.22654 -> 0.16279 with usage_: 368821400
+(shard 0) miss ratio = 0.16279 -> 0.20430 with usage_: 407834488
+(shard 0) miss ratio = 0.20430 -> 0.17565 with usage_: 446195824
+(shard 0) miss ratio = 0.17565 -> 0.15670 with usage_: 483474456
+(shard 0) miss ratio = 0.15670 -> 0.19355 with usage_: 520178936
+(shard 0) miss ratio = 0.19355 -> 0.15010 with usage_: 555371408
+(shard 0) miss ratio = 0.15010 -> 0.15362 with usage_: 579723816
+(shard 0) miss ratio = 0.15362 -> 0.15774 with usage_: 602505840
+(shard 0) miss ratio = 0.15774 -> 0.13915 with usage_: 635599424
+(shard 0) miss ratio = 0.13915 -> 0.13760 with usage_: 668723352
+(shard 0) miss ratio = 0.13760 -> 0.13261 with usage_: 696650040
+(shard 0) miss ratio = 0.13261 -> 0.12415 with usage_: 727368240
+(shard 0) miss ratio = 0.12415 -> 0.11344 with usage_: 758357808
+(shard 0) miss ratio = 0.11344 -> 0.13696 with usage_: 789465032
+(shard 0) miss ratio = 0.13696 -> 0.15240 with usage_: 819345344
+(shard 0) miss ratio = 0.15240 -> 0.12245 with usage_: 845264472
+(shard 0) miss ratio = 0.12245 -> 0.11193 with usage_: 873315688
+(shard 0) miss ratio = 0.11193 -> 0.08935 with usage_: 901296696
+(shard 0) miss ratio = 0.08935 -> 0.10865 with usage_: 925150696
+(shard 0) miss ratio = 0.10865 -> 0.11385 with usage_: 952058408
+(shard 0) miss ratio = 0.11385 -> 0.10127 with usage_: 979111232
+(shard 0) miss ratio = 0.10127 -> 0.11281 with usage_: 1003779136
+(shard 0) miss ratio = 0.11281 -> 0.10920 with usage_: 1027895624
+(shard 0) miss ratio = 0.10920 -> 0.11069 with usage_: 1053137376
+(shard 0) miss ratio = 0.11069 -> 0.08824 with usage_: 1078343544
+(shard 0) miss ratio = 0.08824 -> 0.10240 with usage_: 1101025000
+(shard 0) miss ratio = 0.10240 -> 0.10175 with usage_: 1126201432
+(shard 0) miss ratio = 0.10175 -> 0.09888 with usage_: 1150362896
+(shard 0) miss ratio = 0.09888 -> 0.10547 with usage_: 1161318600
+(shard 0) miss ratio = 0.10547 -> 0.09302 with usage_: 1165987248
+(shard 0) miss ratio = 0.09302 -> 0.10117 with usage_: 1187159760
+(shard 0) miss ratio = 0.10117 -> 0.09677 with usage_: 1208454080
+(shard 0) miss ratio = 0.09677 -> 0.10129 with usage_: 1231381800
+(shard 0) miss ratio = 0.10129 -> 0.09074 with usage_: 1254198728
+(shard 0) miss ratio = 0.09074 -> 0.08131 with usage_: 1276438088
+(shard 0) miss ratio = 0.08131 -> 0.10469 with usage_: 1298156192
+(shard 0) miss ratio = 0.10469 -> 0.07719 with usage_: 1319699000
+(shard 0) miss ratio = 0.07719 -> 0.09238 with usage_: 1341245592
+(shard 0) miss ratio = 0.09238 -> 0.07465 with usage_: 1362665440
+(shard 0) miss ratio = 0.07465 -> 0.07609 with usage_: 1383374696
+(shard 0) miss ratio = 0.07609 -> 0.06262 with usage_: 1403983000
+(shard 0) miss ratio = 0.06262 -> 0.09766 with usage_: 1423756936
+(shard 0) miss ratio = 0.09766 -> 0.08013 with usage_: 1444586792
+(shard 0) miss ratio = 0.08013 -> 0.08394 with usage_: 1464861456
+(shard 0) miss ratio = 0.08394 -> 0.08950 with usage_: 1484865216
+(shard 0) miss ratio = 0.08950 -> 0.08543 with usage_: 1504891912
+(shard 0) miss ratio = 0.08543 -> 0.07877 with usage_: 1524594584
+(shard 0) miss ratio = 0.07877 -> 0.05676 with usage_: 1543508136
+(shard 0) miss ratio = 0.05676 -> 0.05893 with usage_: 1562381872
+(shard 0) miss ratio = 0.05893 -> 0.06364 with usage_: 1579964768
+(shard 0) miss ratio = 0.06364 -> 0.08453 with usage_: 1598824432
+(shard 0) miss ratio = 0.08453 -> 0.06140 with usage_: 1617400192
+(shard 0) miss ratio = 0.06140 -> 0.07304 with usage_: 1635785880
+(shard 0) miss ratio = 0.07304 -> 0.08591 with usage_: 1653967328
+(shard 0) miss ratio = 0.08591 -> 0.07973 with usage_: 1671945192
+(shard 0) miss ratio = 0.07973 -> 0.07439 with usage_: 1690391568
+(shard 0) miss ratio = 0.07439 -> 0.07480 with usage_: 1708510216
+(shard 0) miss ratio = 0.07480 -> 0.07166 with usage_: 1726053072
+(shard 0) miss ratio = 0.07166 -> 0.06950 with usage_: 1742647128
+(shard 0) miss ratio = 0.06950 -> 0.05360 with usage_: 1759821704
+(shard 0) miss ratio = 0.05360 -> 0.05546 with usage_: 1777019216
+(shard 0) miss ratio = 0.05546 -> 0.05682 with usage_: 1793702056
+(shard 0) miss ratio = 0.05682 -> 0.08348 with usage_: 1810815320
+(shard 0) miss ratio = 0.08348 -> 0.06678 with usage_: 1827675472
+(shard 0) miss ratio = 0.06678 -> 0.03879 with usage_: 1843839328
+(shard 0) miss ratio = 0.03879 -> 0.07301 with usage_: 1860695040
+(shard 0) miss ratio = 0.07301 -> 0.07165 with usage_: 1876730488
+(shard 0) miss ratio = 0.07165 -> 0.06173 with usage_: 1892631280
+(shard 0) miss ratio = 0.06173 -> 0.06643 with usage_: 1908461928
+(shard 0) miss ratio = 0.06643 -> 0.06440 with usage_: 1923951576
+(shard 0) miss ratio = 0.06440 -> 0.04152 with usage_: 1940163744
+(shard 0) miss ratio = 0.04152 -> 0.06228 with usage_: 1955613672
+(shard 0) miss ratio = 0.06228 -> 0.05495 with usage_: 1970633416
+(shard 0) miss ratio = 0.05495 -> 0.06325 with usage_: 1986037280
+(shard 0) miss ratio = 0.06325 -> 0.05237 with usage_: 2001190808
+(shard 0) miss ratio = 0.05237 -> 0.04623 with usage_: 2013263952
+(shard 0) miss ratio = 0.04623 -> 0.06711 with usage_: 2013265024
+(shard 0) miss ratio = 0.06711 -> 0.06486
+cache is stable
+start tuning
+FH lookup hit: 283, FH lookup miss, global hit: 3, lookup miss: 16
+FH miss rate: 0.063
+Global miss rate: 0.053
+best sleep ratio: 0.00, best miss: 0.0
+searching phase (shard 0) miss ratio = 1.10000 -> 0.06520 with usage_: 2013262120
+(shard 0) miss ratio = 0.06520 -> 0.06747 with usage_: 2013262872
+(shard 0) miss ratio = 0.06747 -> 0.05763 with usage_: 2013264040
+(shard 0) miss ratio = 0.05763 -> 0.05996 with usage_: 2013264968
+(shard 0) miss ratio = 0.05996 -> 0.09910 with usage_: 2013265672
+(shard 0) miss ratio = 0.09910 -> 0.04878
+cache is stable
+start tuning
+FH lookup hit: 17, FH lookup miss, global hit: 0, lookup miss: 0
+FH miss rate: 0.000
+Global miss rate: 0.000
+FH lookup hit: 14, FH lookup miss, global hit: 0, lookup miss: 1
+FH miss rate: 0.067
+Global miss rate: 0.067
+best sleep ratio: 0.90, best miss: 0.9
+searching phase FH lookup hit: 9, FH lookup miss, global hit: 0, lookup miss: 0
+FH miss rate: 0.000
+Global miss rate: 0.000
+FH lookup hit: 17, FH lookup miss, global hit: 0, lookup miss: 1
+FH miss rate: 0.056
+Global miss rate: 0.056
+FH lookup hit: 13, FH lookup miss, global hit: 0, lookup miss: 0
+FH miss rate: 0.000
+Global miss rate: 0.000
+FH lookup hit: 25, FH lookup miss, global hit: 0, lookup miss: 0
+FH miss rate: 0.000
+Global miss rate: 0.000
+FH lookup hit: 17, FH lookup miss, global hit: 0, lookup miss: 0
+FH miss rate: 0.000
+Global miss rate: 0.000
+FH lookup hit: 21, FH lookup miss, global hit: 0, lookup miss: 2
+FH miss rate: 0.087
+Global miss rate: 0.087
+FH lookup hit: 19, FH lookup miss, global hit: 0, lookup miss: 2
+FH miss rate: 0.095
+Global miss rate: 0.095
+FH lookup hit: 23, FH lookup miss, global hit: 0, lookup miss: 4
+FH miss rate: 0.148
+Global miss rate: 0.148
+FH lookup hit: 15, FH lookup miss, global hit: 0, lookup miss: 2
+FH miss rate: 0.118
+Global miss rate: 0.118
+FH lookup hit: 19, FH lookup miss, global hit: 1, lookup miss: 0
+FH miss rate: 0.050
+Global miss rate: 0.000
+FH lookup hit: 21, FH lookup miss, global hit: 0, lookup miss: 2
+FH miss rate: 0.087
+Global miss rate: 0.087
+FH lookup hit: 18, FH lookup miss, global hit: 0, lookup miss: 1
+FH miss rate: 0.053
+Global miss rate: 0.053
+FH lookup hit: 20, FH lookup miss, global hit: 1, lookup miss: 1
+FH miss rate: 0.091
+Global miss rate: 0.045
+FH lookup hit: 13, FH lookup miss, global hit: 0, lookup miss: 1
+FH miss rate: 0.071
+Global miss rate: 0.071
+FH lookup hit: 18, FH lookup miss, global hit: 0, lookup miss: 1
+FH miss rate: 0.053
+Global miss rate: 0.053
+FH lookup hit: 13, FH lookup miss, global hit: 0, lookup miss: 0
+FH miss rate: 0.000
+Global miss rate: 0.000
+Construct phase: check 1 FH lookup hit: 120, FH lookup miss, global hit: 0, lookup miss: 7
+FH miss rate: 0.055
+Global miss rate: 0.055
+FH lookup hit: 106, FH lookup miss, global hit: 1, lookup miss: 5
+FH miss rate: 0.054
+Global miss rate: 0.045
+FH lookup hit: 122, FH lookup miss, global hit: 0, lookup miss: 9
+FH miss rate: 0.069
+Global miss rate: 0.069
+FH lookup hit: 191, FH lookup miss, global hit: 1, lookup miss: 6
+FH miss rate: 0.035
+Global miss rate: 0.030
+FH lookup hit: 121, FH lookup miss, global hit: 0, lookup miss: 12
+FH miss rate: 0.090
+Global miss rate: 0.090
+FH lookup hit: 129, FH lookup miss, global hit: 0, lookup miss: 5
+FH miss rate: 0.037
+Global miss rate: 0.037
+FH lookup hit: 139, FH lookup miss, global hit: 0, lookup miss: 8
+FH miss rate: 0.054
+Global miss rate: 0.054
+FH lookup hit: 177, FH lookup miss, global hit: 0, lookup miss: 18
+FH miss rate: 0.092
+Global miss rate: 0.092
+FH lookup hit: 118, FH lookup miss, global hit: 0, lookup miss: 6
+FH miss rate: 0.048
+Global miss rate: 0.048
+FH lookup hit: 163, FH lookup miss, global hit: 1, lookup miss: 7
+FH miss rate: 0.047
+Global miss rate: 0.041
+FH lookup hit: 152, FH lookup miss, global hit: 0, lookup miss: 4
+FH miss rate: 0.026
+Global miss rate: 0.026
+FH lookup hit: 140, FH lookup miss, global hit: 0, lookup miss: 6
+FH miss rate: 0.041
+Global miss rate: 0.041
+FH lookup hit: 136, FH lookup miss, global hit: 2, lookup miss: 7
+FH miss rate: 0.062
+Global miss rate: 0.048
+FH lookup hit: 114, FH lookup miss, global hit: 1, lookup miss: 10
+FH miss rate: 0.088
+Global miss rate: 0.080
+FH lookup hit: 146, FH lookup miss, global hit: 0, lookup miss: 4
+FH miss rate: 0.027
+Global miss rate: 0.027
+FH lookup hit: 123, FH lookup miss, global hit: 0, lookup miss: 6
+FH miss rate: 0.047
+Global miss rate: 0.047
+check 2 FH lookup hit: 233, FH lookup miss, global hit: 0, lookup miss: 15
+FH miss rate: 0.060
+Global miss rate: 0.060
+FH lookup hit: 206, FH lookup miss, global hit: 1, lookup miss: 10
+FH miss rate: 0.051
+Global miss rate: 0.046
+FH lookup hit: 222, FH lookup miss, global hit: 1, lookup miss: 15
+FH miss rate: 0.067
+Global miss rate: 0.063
+FH lookup hit: 340, FH lookup miss, global hit: 1, lookup miss: 17
+FH miss rate: 0.050
+Global miss rate: 0.047
+FH lookup hit: 230, FH lookup miss, global hit: 1, lookup miss: 20
+FH miss rate: 0.084
+Global miss rate: 0.080
+FH lookup hit: 236, FH lookup miss, global hit: 2, lookup miss: 14
+FH miss rate: 0.063
+Global miss rate: 0.056
+FH lookup hit: 248, FH lookup miss, global hit: 1, lookup miss: 15
+FH miss rate: 0.061
+Global miss rate: 0.057
+FH lookup hit: 326, FH lookup miss, global hit: 1, lookup miss: 23
+FH miss rate: 0.069
+Global miss rate: 0.066
+FH lookup hit: 204, FH lookup miss, global hit: 1, lookup miss: 15
+FH miss rate: 0.073
+Global miss rate: 0.068
+FH lookup hit: 282, FH lookup miss, global hit: 1, lookup miss: 14
+FH miss rate: 0.051
+Global miss rate: 0.047
+FH lookup hit: 282, FH lookup miss, global hit: 1, lookup miss: 13
+FH miss rate: 0.047
+Global miss rate: 0.044
+FH lookup hit: 267, FH lookup miss, global hit: 0, lookup miss: 10
+FH miss rate: 0.036
+Global miss rate: 0.036
+FH lookup hit: 227, FH lookup miss, global hit: 3, lookup miss: 15
+FH miss rate: 0.073
+Global miss rate: 0.061
+FH lookup hit: 230, FH lookup miss, global hit: 1, lookup miss: 13
+FH miss rate: 0.057
+Global miss rate: 0.053
+FH lookup hit: 246, FH lookup miss, global hit: 0, lookup miss: 12
+FH miss rate: 0.047
+Global miss rate: 0.047
+FH lookup hit: 227, FH lookup miss, global hit: 0, lookup miss: 17
+FH miss rate: 0.070
+Global miss rate: 0.070
+Finish experiment warmup stage
+warmup finish: 2024/03/12-20:09:31.188373
+Warmup complete 30000000 requests in 119.612 seconds.
+read num: 15000000, read avg latency: 216.250 us, read median latency: 161.026 us
+read P999: 1531.475 us, P99: 792.545 us, P95: 494.406 us, P90: 377.026 us, P75: 244.594 us
+update num: 0, update avg latency: 0 us, update median latency: 0 us
+update P999: 0 us, P99: 0 us, P95: 0 us, P90: 0 us, P75: 0 us
+Work latency: 216.250 us
+Work IOPS: 250.811 K (end to end latency: 255.172 us)
+check 3 FH lookup hit: 275, FH lookup miss, global hit: 0, lookup miss: 15
+FH miss rate: 0.052
+Global miss rate: 0.052
+FH lookup hit: 247, FH lookup miss, global hit: 2, lookup miss: 12
+FH miss rate: 0.054
+Global miss rate: 0.046
+FH lookup hit: 262, FH lookup miss, global hit: 1, lookup miss: 16
+FH miss rate: 0.061
+Global miss rate: 0.057
+FH lookup hit: 414, FH lookup miss, global hit: 1, lookup miss: 18
+FH miss rate: 0.044
+Global miss rate: 0.042
+FH lookup hit: 277, FH lookup miss, global hit: 2, lookup miss: 24
+FH miss rate: 0.086
+Global miss rate: 0.079
+FH lookup hit: 281, FH lookup miss, global hit: 3, lookup miss: 17
+FH miss rate: 0.066
+Global miss rate: 0.056
+FH lookup hit: 299, FH lookup miss, global hit: 1, lookup miss: 17
+FH miss rate: 0.057
+Global miss rate: 0.054
+FH lookup hit: 383, FH lookup miss, global hit: 1, lookup miss: 25
+FH miss rate: 0.064
+Global miss rate: 0.061
+FH lookup hit: 224, FH lookup miss, global hit: 2, lookup miss: 16
+FH miss rate: 0.074
+Global miss rate: 0.066
+FH lookup hit: 347, FH lookup miss, global hit: 1, lookup miss: 16
+FH miss rate: 0.047
+Global miss rate: 0.044
+FH lookup hit: 337, FH lookup miss, global hit: 1, lookup miss: 14
+FH miss rate: 0.043
+Global miss rate: 0.040
+FH lookup hit: 307, FH lookup miss, global hit: 0, lookup miss: 13
+FH miss rate: 0.041
+Global miss rate: 0.041
+FH lookup hit: 271, FH lookup miss, global hit: 3, lookup miss: 19
+FH miss rate: 0.075
+Global miss rate: 0.065
+FH lookup hit: 276, FH lookup miss, global hit: 1, lookup miss: 13
+FH miss rate: 0.048
+Global miss rate: 0.045
+FH lookup hit: 294, FH lookup miss, global hit: 0, lookup miss: 18
+FH miss rate: 0.058
+Global miss rate: 0.058
+FH lookup hit: 273, FH lookup miss, global hit: 0, lookup miss: 19
+FH miss rate: 0.065
+Global miss rate: 0.065
+Work median latency: 161.026 us
+Work P999: 1531.475us, P99: 792.545us, P95: 494.406us, P90: 377.026us, P75: 244.594us
+Block read time: 73.000 us (count: 15000000)
+Block avg read time: 133.228 us (count: 8219039)
+block cache hit ratio: 0.911 (hit: 84465987, miss: 8219039)
+block cache add failures: 0
+block cache index hit ratio: -nan (hit: 0, miss: 0)
+block cache filter hit ratio: -nan (hit: 0, miss: 0)
+block cache data hit ratio: 0.911 (hit: 84465987, miss: 8219039)
+block cache bytes read: 366076554464, write: 35580725344
+memtable hit ratio: 0.000 (hit: 0, miss: 30000000)
+client2 have monitor!
+start time: 2024/03/12-20:09:33.405864
+client coreid: 2
+client coreid: 0
+client coreid: 1
+client coreid: 4
+client coreid: 3
+client coreid: 5
+client coreid: 6
+Starting a new RocksDB worker thread, thread id: 0
+starting requests...
+client coreid: 7
+Starting a new RocksDB worker thread, thread id: 7
+Starting a new RocksDB worker thread, thread id: 2Starting a new RocksDB worker thread, thread id: 
+3
+Starting a new RocksDB worker thread, thread id: 4
+client coreid: 8
+client coreid: 9
+Starting a new RocksDB worker thread, thread id: 6
+client coreid: 10
+Starting a new RocksDB worker thread, thread id: 5
+Starting a new RocksDB worker thread, thread id: Starting a new RocksDB worker thread, thread id: 1
+10
+Starting a new RocksDB worker thread, thread id: 8
+client coreid: 11
+Starting a new RocksDB worker thread, thread id: 9
+Starting a new RocksDB worker thread, thread id: 11
+client coreid: 12
+client coreid: 13
+client coreid: 14
+client coreid: 15
+Starting a new RocksDB worker thread, thread id: 13
+Starting a new RocksDB worker thread, thread id: 15
+client coreid: 16
+Starting a new RocksDB worker thread, thread id: 14
+Starting a new RocksDB worker thread, thread id: 12
+Starting a new RocksDB worker thread, thread id: 16
+client coreid: 17
+client coreid: 18
+client coreid: 19
+Starting a new RocksDB worker thread, thread id: 17
+Starting a new RocksDB worker thread, thread id: 19
+client coreid: 20
+Starting a new RocksDB worker thread, thread id: 18
+client coreid: 21
+Starting a new RocksDB worker thread, thread id: 20
+client coreid: 22
+Starting a new RocksDB worker thread, thread id: 21
+client coreid: 23
+client coreid: 24
+Starting a new RocksDB worker thread, thread id: 22
+client coreid: 25
+client coreid: 26
+client coreid: 27
+Starting a new RocksDB worker thread, thread id: 23
+Starting a new RocksDB worker thread, thread id: 25
+Starting a new RocksDB worker thread, thread id: 26
+Starting a new RocksDB worker thread, thread id: 27
+client coreid: 28
+Starting a new RocksDB worker thread, thread id: 24
+client coreid: 29
+Starting a new RocksDB worker thread, thread id: 28
+client coreid: 30
+client coreid: 31
+Starting a new RocksDB worker thread, thread id: 30
+client coreid: 32
+Starting a new RocksDB worker thread, thread id: 29
+Starting a new RocksDB worker thread, thread id: 31
+client coreid: 33
+Starting a new RocksDB worker thread, thread id: 32
+Starting a new RocksDB worker thread, thread id: 33
+client coreid: 34
+client coreid: 35
+client coreid: 36
+Starting a new RocksDB worker thread, thread id: 34
+Starting a new RocksDB worker thread, thread id: 36
+client coreid: 37
+Starting a new RocksDB worker thread, thread id: 35
+client coreid: 38
+Starting a new RocksDB worker thread, thread id: 37
+client coreid: 39
+client coreid: 40
+client coreid: 41
+Starting a new RocksDB worker thread, thread id: 38
+Starting a new RocksDB worker thread, thread id: 39
+client coreid: 42
+Starting a new RocksDB worker thread, thread id: 40
+Starting a new RocksDB worker thread, thread id: 41
+client coreid: 43
+Starting a new RocksDB worker thread, thread id: 42
+client coreid: 44
+Starting a new RocksDB worker thread, thread id: 43
+client coreid: 45
+Starting a new RocksDB worker thread, thread id: 44
+client coreid: 46
+client coreid: 47
+Starting a new RocksDB worker thread, thread id: 45
+Starting a new RocksDB worker thread, thread id: 47
+client coreid: 48
+Starting a new RocksDB worker thread, thread id: 46
+client coreid: 49
+Starting a new RocksDB worker thread, thread id: 48
+client coreid: 50
+client coreid: 51
+Starting a new RocksDB worker thread, thread id: 49
+client coreid: 52
+Starting a new RocksDB worker thread, thread id: 50
+Starting a new RocksDB worker thread, thread id: 52
+Starting a new RocksDB worker thread, thread id: 51
+client coreid: 53
+client coreid: 54
+Starting a new RocksDB worker thread, thread id: 53
+Starting a new RocksDB worker thread, thread id: client coreid: 55
+54
+client coreid: 56
+Starting a new RocksDB worker thread, thread id: 55
+client coreid: 57
+Starting a new RocksDB worker thread, thread id: 56
+client coreid: 58
+client coreid: 59
+Starting a new RocksDB worker thread, thread id: 57
+Starting a new RocksDB worker thread, thread id: 58
+Starting a new RocksDB worker thread, thread id: 59
+client coreid: 60
+client coreid: 61
+client coreid: 62
+Starting a new RocksDB worker thread, thread id: 60
+client coreid: 63
+Starting a new RocksDB worker thread, thread id: 61
+Starting a new RocksDB worker thread, thread id: 63
+Starting a new RocksDB worker thread, thread id: 62
+push monitor!
+client coreid: 120
+check 4 FH lookup hit: 1609, FH lookup miss, global hit: 8, lookup miss: 89
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 1397, FH lookup miss, global hit: 5, lookup miss: 93
+FH miss rate: 0.066
+Global miss rate: 0.062
+FH lookup hit: 1550, FH lookup miss, global hit: 12, lookup miss: 106
+FH miss rate: 0.071
+Global miss rate: 0.064
+FH lookup hit: 2340, FH lookup miss, global hit: 13, lookup miss: 96
+FH miss rate: 0.045
+Global miss rate: 0.039
+FH lookup hit: 1491, FH lookup miss, global hit: 7, lookup miss: 106
+FH miss rate: 0.070
+Global miss rate: 0.066
+FH lookup hit: 1585, FH lookup miss, global hit: 14, lookup miss: 110
+FH miss rate: 0.073
+Global miss rate: 0.064
+FH lookup hit: 1850, FH lookup miss, global hit: 12, lookup miss: 106
+FH miss rate: 0.060
+Global miss rate: 0.054
+FH lookup hit: 2207, FH lookup miss, global hit: 8, lookup miss: 99
+FH miss rate: 0.046
+Global miss rate: 0.043
+FH lookup hit: 1427, FH lookup miss, global hit: 14, lookup miss: 94
+FH miss rate: 0.070
+Global miss rate: 0.061
+FH lookup hit: 1905, FH lookup miss, global hit: 8, lookup miss: 123
+FH miss rate: 0.064
+Global miss rate: 0.060
+FH lookup hit: 2102, FH lookup miss, global hit: 10, lookup miss: 88
+FH miss rate: 0.045
+Global miss rate: 0.040
+FH lookup hit: 1654, FH lookup miss, global hit: 13, lookup miss: 91
+FH miss rate: 0.059
+Global miss rate: 0.052
+FH lookup hit: 1616, FH lookup miss, global hit: 18, lookup miss: 103
+FH miss rate: 0.070
+Global miss rate: 0.059
+FH lookup hit: 1576, FH lookup miss, global hit: 6, lookup miss: 96
+FH miss rate: 0.061
+Global miss rate: 0.057
+FH lookup hit: 1590, FH lookup miss, global hit: 11, lookup miss: 93
+FH miss rate: 0.061
+Global miss rate: 0.055
+FH lookup hit: 1674, FH lookup miss, global hit: 6, lookup miss: 97
+FH miss rate: 0.058
+Global miss rate: 0.055
+check 5 FH lookup hit: 3064, FH lookup miss, global hit: 23, lookup miss: 179
+FH miss rate: 0.062
+Global miss rate: 0.055
+FH lookup hit: 2782, FH lookup miss, global hit: 14, lookup miss: 195
+FH miss rate: 0.070
+Global miss rate: 0.065
+FH lookup hit: 3039, FH lookup miss, global hit: 27, lookup miss: 200
+FH miss rate: 0.070
+Global miss rate: 0.061
+FH lookup hit: 4407, FH lookup miss, global hit: 26, lookup miss: 199
+FH miss rate: 0.049
+Global miss rate: 0.043
+FH lookup hit: 2868, FH lookup miss, global hit: 16, lookup miss: 214
+FH miss rate: 0.074
+Global miss rate: 0.069
+FH lookup hit: 3095, FH lookup miss, global hit: 27, lookup miss: 212
+FH miss rate: 0.072
+Global miss rate: 0.064
+FH lookup hit: 3610, FH lookup miss, global hit: 22, lookup miss: 185
+FH miss rate: 0.054
+Global miss rate: 0.048
+FH lookup hit: 4181, FH lookup miss, global hit: 20, lookup miss: 181
+FH miss rate: 0.046
+Global miss rate: 0.041
+FH lookup hit: 2802, FH lookup miss, global hit: 26, lookup miss: 175
+FH miss rate: 0.067
+Global miss rate: 0.058
+FH lookup hit: 3644, FH lookup miss, global hit: 21, lookup miss: 221
+FH miss rate: 0.062
+Global miss rate: 0.057
+FH lookup hit: 4186, FH lookup miss, global hit: 15, lookup miss: 172
+FH miss rate: 0.043
+Global miss rate: 0.039
+FH lookup hit: 3220, FH lookup miss, global hit: 17, lookup miss: 177
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 3135, FH lookup miss, global hit: 30, lookup miss: 203
+FH miss rate: 0.069
+Global miss rate: 0.060
+FH lookup hit: 3148, FH lookup miss, global hit: 17, lookup miss: 186
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 3084, FH lookup miss, global hit: 20, lookup miss: 183
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 3211, FH lookup miss, global hit: 11, lookup miss: 202
+FH miss rate: 0.062
+Global miss rate: 0.059
+check 6 FH lookup hit: 4642, FH lookup miss, global hit: 34, lookup miss: 267
+FH miss rate: 0.061
+Global miss rate: 0.054
+FH lookup hit: 4197, FH lookup miss, global hit: 23, lookup miss: 293
+FH miss rate: 0.070
+Global miss rate: 0.065
+FH lookup hit: 4569, FH lookup miss, global hit: 36, lookup miss: 308
+FH miss rate: 0.070
+Global miss rate: 0.063
+FH lookup hit: 6462, FH lookup miss, global hit: 34, lookup miss: 301
+FH miss rate: 0.049
+Global miss rate: 0.044
+FH lookup hit: 4394, FH lookup miss, global hit: 23, lookup miss: 294
+FH miss rate: 0.067
+Global miss rate: 0.062
+FH lookup hit: 4646, FH lookup miss, global hit: 41, lookup miss: 320
+FH miss rate: 0.072
+Global miss rate: 0.064
+FH lookup hit: 5337, FH lookup miss, global hit: 31, lookup miss: 269
+FH miss rate: 0.053
+Global miss rate: 0.048
+FH lookup hit: 6215, FH lookup miss, global hit: 27, lookup miss: 261
+FH miss rate: 0.044
+Global miss rate: 0.040
+FH lookup hit: 4161, FH lookup miss, global hit: 34, lookup miss: 288
+FH miss rate: 0.072
+Global miss rate: 0.064
+FH lookup hit: 5510, FH lookup miss, global hit: 29, lookup miss: 331
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 6227, FH lookup miss, global hit: 25, lookup miss: 281
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 4753, FH lookup miss, global hit: 26, lookup miss: 268
+FH miss rate: 0.058
+Global miss rate: 0.053
+FH lookup hit: 4680, FH lookup miss, global hit: 35, lookup miss: 299
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 4631, FH lookup miss, global hit: 27, lookup miss: 292
+FH miss rate: 0.064
+Global miss rate: 0.059
+FH lookup hit: 4583, FH lookup miss, global hit: 29, lookup miss: 277
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 4784, FH lookup miss, global hit: 18, lookup miss: 293
+FH miss rate: 0.061
+Global miss rate: 0.058
+check 7 FH lookup hit: 6100, FH lookup miss, global hit: 52, lookup miss: 361
+FH miss rate: 0.063
+Global miss rate: 0.055
+FH lookup hit: 5522, FH lookup miss, global hit: 32, lookup miss: 384
+FH miss rate: 0.070
+Global miss rate: 0.065
+FH lookup hit: 6178, FH lookup miss, global hit: 43, lookup miss: 399
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 8601, FH lookup miss, global hit: 45, lookup miss: 388
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 5849, FH lookup miss, global hit: 37, lookup miss: 379
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 6303, FH lookup miss, global hit: 55, lookup miss: 420
+FH miss rate: 0.070
+Global miss rate: 0.062
+FH lookup hit: 7057, FH lookup miss, global hit: 37, lookup miss: 372
+FH miss rate: 0.055
+Global miss rate: 0.050
+FH lookup hit: 8221, FH lookup miss, global hit: 38, lookup miss: 367
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 5534, FH lookup miss, global hit: 42, lookup miss: 387
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 7305, FH lookup miss, global hit: 38, lookup miss: 433
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 8332, FH lookup miss, global hit: 33, lookup miss: 372
+FH miss rate: 0.046
+Global miss rate: 0.043
+FH lookup hit: 6274, FH lookup miss, global hit: 34, lookup miss: 358
+FH miss rate: 0.059
+Global miss rate: 0.054
+FH lookup hit: 6231, FH lookup miss, global hit: 49, lookup miss: 403
+FH miss rate: 0.068
+Global miss rate: 0.060
+FH lookup hit: 6197, FH lookup miss, global hit: 34, lookup miss: 375
+FH miss rate: 0.062
+Global miss rate: 0.057
+FH lookup hit: 6124, FH lookup miss, global hit: 40, lookup miss: 364
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 6394, FH lookup miss, global hit: 26, lookup miss: 384
+FH miss rate: 0.060
+Global miss rate: 0.056
+check 8 FH lookup hit: 7597, FH lookup miss, global hit: 60, lookup miss: 463
+FH miss rate: 0.064
+Global miss rate: 0.057
+FH lookup hit: 6932, FH lookup miss, global hit: 41, lookup miss: 475
+FH miss rate: 0.069
+Global miss rate: 0.064
+FH lookup hit: 7756, FH lookup miss, global hit: 52, lookup miss: 481
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 10741, FH lookup miss, global hit: 56, lookup miss: 478
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 7280, FH lookup miss, global hit: 42, lookup miss: 495
+FH miss rate: 0.069
+Global miss rate: 0.063
+FH lookup hit: 7936, FH lookup miss, global hit: 62, lookup miss: 524
+FH miss rate: 0.069
+Global miss rate: 0.061
+FH lookup hit: 8807, FH lookup miss, global hit: 46, lookup miss: 469
+FH miss rate: 0.055
+Global miss rate: 0.050
+FH lookup hit: 10347, FH lookup miss, global hit: 52, lookup miss: 470
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 6903, FH lookup miss, global hit: 50, lookup miss: 489
+FH miss rate: 0.072
+Global miss rate: 0.066
+FH lookup hit: 9123, FH lookup miss, global hit: 45, lookup miss: 544
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 10441, FH lookup miss, global hit: 48, lookup miss: 470
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 7868, FH lookup miss, global hit: 39, lookup miss: 451
+FH miss rate: 0.059
+Global miss rate: 0.054
+FH lookup hit: 7802, FH lookup miss, global hit: 64, lookup miss: 502
+FH miss rate: 0.068
+Global miss rate: 0.060
+FH lookup hit: 7684, FH lookup miss, global hit: 42, lookup miss: 450
+FH miss rate: 0.060
+Global miss rate: 0.055
+FH lookup hit: 7671, FH lookup miss, global hit: 52, lookup miss: 468
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 7986, FH lookup miss, global hit: 30, lookup miss: 477
+FH miss rate: 0.060
+Global miss rate: 0.056
+check 9 FH lookup hit: 9122, FH lookup miss, global hit: 72, lookup miss: 559
+FH miss rate: 0.065
+Global miss rate: 0.057
+FH lookup hit: 8318, FH lookup miss, global hit: 52, lookup miss: 572
+FH miss rate: 0.070
+Global miss rate: 0.064
+FH lookup hit: 9389, FH lookup miss, global hit: 61, lookup miss: 562
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 12981, FH lookup miss, global hit: 68, lookup miss: 564
+FH miss rate: 0.046
+Global miss rate: 0.041
+FH lookup hit: 8814, FH lookup miss, global hit: 50, lookup miss: 602
+FH miss rate: 0.069
+Global miss rate: 0.064
+FH lookup hit: 9477, FH lookup miss, global hit: 77, lookup miss: 614
+FH miss rate: 0.068
+Global miss rate: 0.060
+FH lookup hit: 10550, FH lookup miss, global hit: 53, lookup miss: 565
+FH miss rate: 0.055
+Global miss rate: 0.051
+FH lookup hit: 12397, FH lookup miss, global hit: 66, lookup miss: 575
+FH miss rate: 0.049
+Global miss rate: 0.044
+FH lookup hit: 8259, FH lookup miss, global hit: 65, lookup miss: 597
+FH miss rate: 0.074
+Global miss rate: 0.067
+FH lookup hit: 10993, FH lookup miss, global hit: 57, lookup miss: 633
+FH miss rate: 0.059
+Global miss rate: 0.054
+FH lookup hit: 12531, FH lookup miss, global hit: 58, lookup miss: 565
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 9391, FH lookup miss, global hit: 46, lookup miss: 546
+FH miss rate: 0.059
+Global miss rate: 0.055
+FH lookup hit: 9479, FH lookup miss, global hit: 71, lookup miss: 596
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 9202, FH lookup miss, global hit: 51, lookup miss: 548
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 9169, FH lookup miss, global hit: 63, lookup miss: 573
+FH miss rate: 0.065
+Global miss rate: 0.058
+FH lookup hit: 9604, FH lookup miss, global hit: 47, lookup miss: 564
+FH miss rate: 0.060
+Global miss rate: 0.055
+check 10 FH lookup hit: 10634, FH lookup miss, global hit: 84, lookup miss: 663
+FH miss rate: 0.066
+Global miss rate: 0.058
+FH lookup hit: 9779, FH lookup miss, global hit: 65, lookup miss: 671
+FH miss rate: 0.070
+Global miss rate: 0.064
+FH lookup hit: 11025, FH lookup miss, global hit: 71, lookup miss: 648
+FH miss rate: 0.061
+Global miss rate: 0.055
+FH lookup hit: 15278, FH lookup miss, global hit: 77, lookup miss: 675
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 10263, FH lookup miss, global hit: 56, lookup miss: 705
+FH miss rate: 0.069
+Global miss rate: 0.064
+FH lookup hit: 11085, FH lookup miss, global hit: 89, lookup miss: 721
+FH miss rate: 0.068
+Global miss rate: 0.061
+FH lookup hit: 12389, FH lookup miss, global hit: 67, lookup miss: 673
+FH miss rate: 0.056
+Global miss rate: 0.051
+FH lookup hit: 14526, FH lookup miss, global hit: 72, lookup miss: 670
+FH miss rate: 0.049
+Global miss rate: 0.044
+FH lookup hit: 9676, FH lookup miss, global hit: 79, lookup miss: 717
+FH miss rate: 0.076
+Global miss rate: 0.068
+FH lookup hit: 12878, FH lookup miss, global hit: 67, lookup miss: 734
+FH miss rate: 0.059
+Global miss rate: 0.054
+FH lookup hit: 14749, FH lookup miss, global hit: 66, lookup miss: 655
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 11011, FH lookup miss, global hit: 65, lookup miss: 637
+FH miss rate: 0.060
+Global miss rate: 0.054
+FH lookup hit: 11176, FH lookup miss, global hit: 80, lookup miss: 683
+FH miss rate: 0.064
+Global miss rate: 0.057
+FH lookup hit: 10833, FH lookup miss, global hit: 62, lookup miss: 656
+FH miss rate: 0.062
+Global miss rate: 0.057
+FH lookup hit: 10758, FH lookup miss, global hit: 72, lookup miss: 659
+FH miss rate: 0.064
+Global miss rate: 0.057
+FH lookup hit: 11267, FH lookup miss, global hit: 55, lookup miss: 676
+FH miss rate: 0.061
+Global miss rate: 0.056
+check 11 FH lookup hit: 12188, FH lookup miss, global hit: 95, lookup miss: 763
+FH miss rate: 0.066
+Global miss rate: 0.058
+FH lookup hit: 11249, FH lookup miss, global hit: 77, lookup miss: 767
+FH miss rate: 0.070
+Global miss rate: 0.063
+FH lookup hit: 12661, FH lookup miss, global hit: 89, lookup miss: 759
+FH miss rate: 0.063
+Global miss rate: 0.056
+FH lookup hit: 17478, FH lookup miss, global hit: 86, lookup miss: 771
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 11740, FH lookup miss, global hit: 65, lookup miss: 809
+FH miss rate: 0.069
+Global miss rate: 0.064
+FH lookup hit: 12749, FH lookup miss, global hit: 99, lookup miss: 817
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 14257, FH lookup miss, global hit: 76, lookup miss: 760
+FH miss rate: 0.055
+Global miss rate: 0.050
+FH lookup hit: 16708, FH lookup miss, global hit: 91, lookup miss: 776
+FH miss rate: 0.049
+Global miss rate: 0.044
+FH lookup hit: 11065, FH lookup miss, global hit: 90, lookup miss: 811
+FH miss rate: 0.075
+Global miss rate: 0.068
+FH lookup hit: 14773, FH lookup miss, global hit: 77, lookup miss: 837
+FH miss rate: 0.058
+Global miss rate: 0.053
+FH lookup hit: 16956, FH lookup miss, global hit: 85, lookup miss: 758
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 12631, FH lookup miss, global hit: 75, lookup miss: 728
+FH miss rate: 0.060
+Global miss rate: 0.054
+FH lookup hit: 12843, FH lookup miss, global hit: 93, lookup miss: 769
+FH miss rate: 0.063
+Global miss rate: 0.056
+FH lookup hit: 12329, FH lookup miss, global hit: 72, lookup miss: 750
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 12254, FH lookup miss, global hit: 84, lookup miss: 754
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 12955, FH lookup miss, global hit: 67, lookup miss: 784
+FH miss rate: 0.062
+Global miss rate: 0.057
+check 12 FH lookup hit: 13744, FH lookup miss, global hit: 110, lookup miss: 862
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 12633, FH lookup miss, global hit: 85, lookup miss: 874
+FH miss rate: 0.071
+Global miss rate: 0.064
+FH lookup hit: 14254, FH lookup miss, global hit: 100, lookup miss: 851
+FH miss rate: 0.063
+Global miss rate: 0.056
+FH lookup hit: 19637, FH lookup miss, global hit: 99, lookup miss: 868
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 13260, FH lookup miss, global hit: 75, lookup miss: 908
+FH miss rate: 0.069
+Global miss rate: 0.064
+FH lookup hit: 14388, FH lookup miss, global hit: 106, lookup miss: 921
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 16062, FH lookup miss, global hit: 88, lookup miss: 860
+FH miss rate: 0.056
+Global miss rate: 0.051
+FH lookup hit: 18866, FH lookup miss, global hit: 107, lookup miss: 887
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 12486, FH lookup miss, global hit: 98, lookup miss: 922
+FH miss rate: 0.076
+Global miss rate: 0.068
+FH lookup hit: 16662, FH lookup miss, global hit: 91, lookup miss: 922
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 19014, FH lookup miss, global hit: 95, lookup miss: 862
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 14213, FH lookup miss, global hit: 82, lookup miss: 808
+FH miss rate: 0.059
+Global miss rate: 0.053
+FH lookup hit: 14524, FH lookup miss, global hit: 103, lookup miss: 870
+FH miss rate: 0.063
+Global miss rate: 0.056
+FH lookup hit: 13849, FH lookup miss, global hit: 84, lookup miss: 864
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 13834, FH lookup miss, global hit: 97, lookup miss: 871
+FH miss rate: 0.065
+Global miss rate: 0.059
+FH lookup hit: 14634, FH lookup miss, global hit: 79, lookup miss: 875
+FH miss rate: 0.061
+Global miss rate: 0.056
+check 13 FH lookup hit: 15281, FH lookup miss, global hit: 124, lookup miss: 951
+FH miss rate: 0.066
+Global miss rate: 0.058
+FH lookup hit: 14032, FH lookup miss, global hit: 94, lookup miss: 986
+FH miss rate: 0.071
+Global miss rate: 0.065
+FH lookup hit: 15812, FH lookup miss, global hit: 109, lookup miss: 963
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 21908, FH lookup miss, global hit: 109, lookup miss: 959
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 14792, FH lookup miss, global hit: 88, lookup miss: 1005
+FH miss rate: 0.069
+Global miss rate: 0.063
+FH lookup hit: 15974, FH lookup miss, global hit: 121, lookup miss: 1018
+FH miss rate: 0.067
+Global miss rate: 0.059
+FH lookup hit: 17845, FH lookup miss, global hit: 97, lookup miss: 960
+FH miss rate: 0.056
+Global miss rate: 0.051
+FH lookup hit: 21037, FH lookup miss, global hit: 120, lookup miss: 997
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 13813, FH lookup miss, global hit: 112, lookup miss: 1024
+FH miss rate: 0.076
+Global miss rate: 0.068
+FH lookup hit: 18480, FH lookup miss, global hit: 103, lookup miss: 1016
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 21164, FH lookup miss, global hit: 109, lookup miss: 953
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 15825, FH lookup miss, global hit: 94, lookup miss: 904
+FH miss rate: 0.059
+Global miss rate: 0.054
+FH lookup hit: 16146, FH lookup miss, global hit: 110, lookup miss: 964
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 15428, FH lookup miss, global hit: 96, lookup miss: 972
+FH miss rate: 0.065
+Global miss rate: 0.059
+FH lookup hit: 15411, FH lookup miss, global hit: 101, lookup miss: 967
+FH miss rate: 0.065
+Global miss rate: 0.059
+FH lookup hit: 16275, FH lookup miss, global hit: 91, lookup miss: 976
+FH miss rate: 0.062
+Global miss rate: 0.056
+check 14 FH lookup hit: 16870, FH lookup miss, global hit: 133, lookup miss: 1060
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 15519, FH lookup miss, global hit: 105, lookup miss: 1102
+FH miss rate: 0.072
+Global miss rate: 0.066
+FH lookup hit: 17398, FH lookup miss, global hit: 123, lookup miss: 1063
+FH miss rate: 0.064
+Global miss rate: 0.057
+FH lookup hit: 24162, FH lookup miss, global hit: 121, lookup miss: 1040
+FH miss rate: 0.046
+Global miss rate: 0.041
+FH lookup hit: 16398, FH lookup miss, global hit: 101, lookup miss: 1094
+FH miss rate: 0.068
+Global miss rate: 0.062
+FH lookup hit: 17536, FH lookup miss, global hit: 132, lookup miss: 1134
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 19649, FH lookup miss, global hit: 109, lookup miss: 1073
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 23260, FH lookup miss, global hit: 126, lookup miss: 1103
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 15135, FH lookup miss, global hit: 127, lookup miss: 1120
+FH miss rate: 0.076
+Global miss rate: 0.068
+FH lookup hit: 20354, FH lookup miss, global hit: 115, lookup miss: 1135
+FH miss rate: 0.058
+Global miss rate: 0.053
+FH lookup hit: 23305, FH lookup miss, global hit: 120, lookup miss: 1051
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 17406, FH lookup miss, global hit: 105, lookup miss: 1029
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 17808, FH lookup miss, global hit: 118, lookup miss: 1060
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 17023, FH lookup miss, global hit: 101, lookup miss: 1064
+FH miss rate: 0.064
+Global miss rate: 0.059
+FH lookup hit: 16994, FH lookup miss, global hit: 112, lookup miss: 1047
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 17927, FH lookup miss, global hit: 102, lookup miss: 1077
+FH miss rate: 0.062
+Global miss rate: 0.056
+check 15 FH lookup hit: 18388, FH lookup miss, global hit: 144, lookup miss: 1145
+FH miss rate: 0.066
+Global miss rate: 0.058
+FH lookup hit: 16956, FH lookup miss, global hit: 111, lookup miss: 1195
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 18926, FH lookup miss, global hit: 130, lookup miss: 1170
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 26389, FH lookup miss, global hit: 133, lookup miss: 1141
+FH miss rate: 0.046
+Global miss rate: 0.041
+FH lookup hit: 17929, FH lookup miss, global hit: 110, lookup miss: 1185
+FH miss rate: 0.067
+Global miss rate: 0.062
+FH lookup hit: 19188, FH lookup miss, global hit: 148, lookup miss: 1236
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 21493, FH lookup miss, global hit: 120, lookup miss: 1182
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 25366, FH lookup miss, global hit: 142, lookup miss: 1206
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 16561, FH lookup miss, global hit: 134, lookup miss: 1210
+FH miss rate: 0.075
+Global miss rate: 0.068
+FH lookup hit: 22135, FH lookup miss, global hit: 130, lookup miss: 1231
+FH miss rate: 0.058
+Global miss rate: 0.052
+FH lookup hit: 25432, FH lookup miss, global hit: 131, lookup miss: 1151
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 18998, FH lookup miss, global hit: 115, lookup miss: 1126
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 19481, FH lookup miss, global hit: 138, lookup miss: 1167
+FH miss rate: 0.063
+Global miss rate: 0.056
+FH lookup hit: 18610, FH lookup miss, global hit: 110, lookup miss: 1172
+FH miss rate: 0.064
+Global miss rate: 0.059
+FH lookup hit: 18483, FH lookup miss, global hit: 128, lookup miss: 1138
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 19534, FH lookup miss, global hit: 111, lookup miss: 1176
+FH miss rate: 0.062
+Global miss rate: 0.056
+check 16 FH lookup hit: 19921, FH lookup miss, global hit: 152, lookup miss: 1251
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 18371, FH lookup miss, global hit: 121, lookup miss: 1284
+FH miss rate: 0.071
+Global miss rate: 0.065
+FH lookup hit: 20552, FH lookup miss, global hit: 139, lookup miss: 1261
+FH miss rate: 0.064
+Global miss rate: 0.057
+FH lookup hit: 28575, FH lookup miss, global hit: 139, lookup miss: 1245
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 19454, FH lookup miss, global hit: 124, lookup miss: 1274
+FH miss rate: 0.067
+Global miss rate: 0.061
+FH lookup hit: 20742, FH lookup miss, global hit: 161, lookup miss: 1338
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 23254, FH lookup miss, global hit: 141, lookup miss: 1272
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 27488, FH lookup miss, global hit: 151, lookup miss: 1310
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 17978, FH lookup miss, global hit: 146, lookup miss: 1295
+FH miss rate: 0.074
+Global miss rate: 0.067
+FH lookup hit: 24050, FH lookup miss, global hit: 141, lookup miss: 1323
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 27647, FH lookup miss, global hit: 138, lookup miss: 1246
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 20569, FH lookup miss, global hit: 125, lookup miss: 1217
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 21102, FH lookup miss, global hit: 149, lookup miss: 1268
+FH miss rate: 0.063
+Global miss rate: 0.056
+FH lookup hit: 20200, FH lookup miss, global hit: 122, lookup miss: 1274
+FH miss rate: 0.065
+Global miss rate: 0.059
+FH lookup hit: 20021, FH lookup miss, global hit: 140, lookup miss: 1235
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 21177, FH lookup miss, global hit: 121, lookup miss: 1279
+FH miss rate: 0.062
+Global miss rate: 0.057
+check 17 FH lookup hit: 21454, FH lookup miss, global hit: 165, lookup miss: 1350
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 19847, FH lookup miss, global hit: 135, lookup miss: 1370
+FH miss rate: 0.070
+Global miss rate: 0.064
+FH lookup hit: 22180, FH lookup miss, global hit: 152, lookup miss: 1350
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 30769, FH lookup miss, global hit: 153, lookup miss: 1347
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 20981, FH lookup miss, global hit: 132, lookup miss: 1380
+FH miss rate: 0.067
+Global miss rate: 0.061
+FH lookup hit: 22279, FH lookup miss, global hit: 173, lookup miss: 1417
+FH miss rate: 0.067
+Global miss rate: 0.059
+FH lookup hit: 25173, FH lookup miss, global hit: 152, lookup miss: 1358
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 29585, FH lookup miss, global hit: 162, lookup miss: 1418
+FH miss rate: 0.051
+Global miss rate: 0.045
+FH lookup hit: 19417, FH lookup miss, global hit: 157, lookup miss: 1409
+FH miss rate: 0.075
+Global miss rate: 0.067
+FH lookup hit: 26008, FH lookup miss, global hit: 155, lookup miss: 1422
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 29826, FH lookup miss, global hit: 152, lookup miss: 1352
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 22229, FH lookup miss, global hit: 138, lookup miss: 1325
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 22745, FH lookup miss, global hit: 160, lookup miss: 1379
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 21772, FH lookup miss, global hit: 135, lookup miss: 1389
+FH miss rate: 0.065
+Global miss rate: 0.060
+FH lookup hit: 21614, FH lookup miss, global hit: 150, lookup miss: 1322
+FH miss rate: 0.064
+Global miss rate: 0.057
+FH lookup hit: 22783, FH lookup miss, global hit: 134, lookup miss: 1370
+FH miss rate: 0.062
+Global miss rate: 0.056
+check 18 FH lookup hit: 23007, FH lookup miss, global hit: 173, lookup miss: 1453
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 21239, FH lookup miss, global hit: 145, lookup miss: 1478
+FH miss rate: 0.071
+Global miss rate: 0.065
+FH lookup hit: 23710, FH lookup miss, global hit: 163, lookup miss: 1443
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 32995, FH lookup miss, global hit: 162, lookup miss: 1457
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 22442, FH lookup miss, global hit: 144, lookup miss: 1461
+FH miss rate: 0.067
+Global miss rate: 0.061
+FH lookup hit: 23903, FH lookup miss, global hit: 180, lookup miss: 1524
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 27030, FH lookup miss, global hit: 162, lookup miss: 1459
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 31756, FH lookup miss, global hit: 173, lookup miss: 1514
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 20853, FH lookup miss, global hit: 165, lookup miss: 1512
+FH miss rate: 0.074
+Global miss rate: 0.067
+FH lookup hit: 27959, FH lookup miss, global hit: 165, lookup miss: 1532
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 32012, FH lookup miss, global hit: 157, lookup miss: 1456
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 23809, FH lookup miss, global hit: 147, lookup miss: 1423
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 24423, FH lookup miss, global hit: 173, lookup miss: 1447
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 23286, FH lookup miss, global hit: 145, lookup miss: 1489
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 23166, FH lookup miss, global hit: 157, lookup miss: 1435
+FH miss rate: 0.064
+Global miss rate: 0.058
+FH lookup hit: 24471, FH lookup miss, global hit: 141, lookup miss: 1471
+FH miss rate: 0.062
+Global miss rate: 0.056
+check 19 FH lookup hit: 24551, FH lookup miss, global hit: 180, lookup miss: 1539
+FH miss rate: 0.065
+Global miss rate: 0.059
+FH lookup hit: 22628, FH lookup miss, global hit: 153, lookup miss: 1572
+FH miss rate: 0.071
+Global miss rate: 0.065
+FH lookup hit: 25288, FH lookup miss, global hit: 171, lookup miss: 1547
+FH miss rate: 0.064
+Global miss rate: 0.057
+FH lookup hit: 35286, FH lookup miss, global hit: 170, lookup miss: 1552
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 23904, FH lookup miss, global hit: 153, lookup miss: 1548
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 25474, FH lookup miss, global hit: 191, lookup miss: 1635
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 28911, FH lookup miss, global hit: 169, lookup miss: 1536
+FH miss rate: 0.056
+Global miss rate: 0.050
+FH lookup hit: 33897, FH lookup miss, global hit: 182, lookup miss: 1622
+FH miss rate: 0.051
+Global miss rate: 0.045
+FH lookup hit: 22257, FH lookup miss, global hit: 175, lookup miss: 1603
+FH miss rate: 0.074
+Global miss rate: 0.067
+FH lookup hit: 29836, FH lookup miss, global hit: 180, lookup miss: 1636
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 34121, FH lookup miss, global hit: 169, lookup miss: 1542
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 25457, FH lookup miss, global hit: 155, lookup miss: 1530
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 26062, FH lookup miss, global hit: 182, lookup miss: 1531
+FH miss rate: 0.062
+Global miss rate: 0.055
+FH lookup hit: 24882, FH lookup miss, global hit: 155, lookup miss: 1604
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 24693, FH lookup miss, global hit: 167, lookup miss: 1541
+FH miss rate: 0.065
+Global miss rate: 0.058
+FH lookup hit: 26089, FH lookup miss, global hit: 152, lookup miss: 1575
+FH miss rate: 0.062
+Global miss rate: 0.057
+check 20 FH lookup hit: 26082, FH lookup miss, global hit: 194, lookup miss: 1642
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 24046, FH lookup miss, global hit: 164, lookup miss: 1671
+FH miss rate: 0.071
+Global miss rate: 0.065
+FH lookup hit: 26895, FH lookup miss, global hit: 178, lookup miss: 1634
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 37509, FH lookup miss, global hit: 179, lookup miss: 1649
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 25354, FH lookup miss, global hit: 164, lookup miss: 1640
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 27082, FH lookup miss, global hit: 197, lookup miss: 1730
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 30738, FH lookup miss, global hit: 182, lookup miss: 1618
+FH miss rate: 0.055
+Global miss rate: 0.050
+FH lookup hit: 36027, FH lookup miss, global hit: 190, lookup miss: 1729
+FH miss rate: 0.051
+Global miss rate: 0.046
+FH lookup hit: 23645, FH lookup miss, global hit: 187, lookup miss: 1699
+FH miss rate: 0.074
+Global miss rate: 0.067
+FH lookup hit: 31653, FH lookup miss, global hit: 187, lookup miss: 1737
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 36187, FH lookup miss, global hit: 177, lookup miss: 1635
+FH miss rate: 0.048
+Global miss rate: 0.043
+FH lookup hit: 27018, FH lookup miss, global hit: 161, lookup miss: 1610
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 27626, FH lookup miss, global hit: 198, lookup miss: 1629
+FH miss rate: 0.062
+Global miss rate: 0.055
+FH lookup hit: 26474, FH lookup miss, global hit: 163, lookup miss: 1710
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 26262, FH lookup miss, global hit: 178, lookup miss: 1648
+FH miss rate: 0.065
+Global miss rate: 0.059
+FH lookup hit: 27697, FH lookup miss, global hit: 161, lookup miss: 1655
+FH miss rate: 0.062
+Global miss rate: 0.056
+check 21 FH lookup hit: 27614, FH lookup miss, global hit: 206, lookup miss: 1731
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 25429, FH lookup miss, global hit: 178, lookup miss: 1776
+FH miss rate: 0.071
+Global miss rate: 0.065
+FH lookup hit: 28412, FH lookup miss, global hit: 183, lookup miss: 1724
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 39746, FH lookup miss, global hit: 189, lookup miss: 1751
+FH miss rate: 0.047
+Global miss rate: 0.042
+FH lookup hit: 26801, FH lookup miss, global hit: 177, lookup miss: 1733
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 28680, FH lookup miss, global hit: 214, lookup miss: 1834
+FH miss rate: 0.067
+Global miss rate: 0.060
+FH lookup hit: 32565, FH lookup miss, global hit: 193, lookup miss: 1723
+FH miss rate: 0.056
+Global miss rate: 0.050
+FH lookup hit: 38206, FH lookup miss, global hit: 197, lookup miss: 1824
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 25073, FH lookup miss, global hit: 200, lookup miss: 1804
+FH miss rate: 0.074
+Global miss rate: 0.067
+FH lookup hit: 33469, FH lookup miss, global hit: 196, lookup miss: 1851
+FH miss rate: 0.058
+Global miss rate: 0.052
+FH lookup hit: 38296, FH lookup miss, global hit: 188, lookup miss: 1719
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 28540, FH lookup miss, global hit: 169, lookup miss: 1709
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 29235, FH lookup miss, global hit: 207, lookup miss: 1706
+FH miss rate: 0.061
+Global miss rate: 0.055
+FH lookup hit: 28030, FH lookup miss, global hit: 172, lookup miss: 1822
+FH miss rate: 0.066
+Global miss rate: 0.061
+FH lookup hit: 27770, FH lookup miss, global hit: 187, lookup miss: 1748
+FH miss rate: 0.065
+Global miss rate: 0.059
+FH lookup hit: 29330, FH lookup miss, global hit: 167, lookup miss: 1758
+FH miss rate: 0.062
+Global miss rate: 0.056
+check 22 FH lookup hit: 29132, FH lookup miss, global hit: 223, lookup miss: 1813
+FH miss rate: 0.065
+Global miss rate: 0.058
+FH lookup hit: 26842, FH lookup miss, global hit: 190, lookup miss: 1870
+FH miss rate: 0.071
+Global miss rate: 0.065
+FH lookup hit: 30050, FH lookup miss, global hit: 192, lookup miss: 1836
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 42037, FH lookup miss, global hit: 196, lookup miss: 1849
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 28288, FH lookup miss, global hit: 188, lookup miss: 1814
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 30332, FH lookup miss, global hit: 223, lookup miss: 1930
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 34308, FH lookup miss, global hit: 209, lookup miss: 1827
+FH miss rate: 0.056
+Global miss rate: 0.050
+FH lookup hit: 40360, FH lookup miss, global hit: 203, lookup miss: 1918
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 26413, FH lookup miss, global hit: 212, lookup miss: 1891
+FH miss rate: 0.074
+Global miss rate: 0.066
+FH lookup hit: 35275, FH lookup miss, global hit: 209, lookup miss: 1954
+FH miss rate: 0.058
+Global miss rate: 0.052
+FH lookup hit: 40401, FH lookup miss, global hit: 196, lookup miss: 1809
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 30177, FH lookup miss, global hit: 177, lookup miss: 1801
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 30818, FH lookup miss, global hit: 216, lookup miss: 1804
+FH miss rate: 0.062
+Global miss rate: 0.055
+FH lookup hit: 29629, FH lookup miss, global hit: 185, lookup miss: 1934
+FH miss rate: 0.067
+Global miss rate: 0.061
+FH lookup hit: 29348, FH lookup miss, global hit: 196, lookup miss: 1864
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 30940, FH lookup miss, global hit: 176, lookup miss: 1868
+FH miss rate: 0.062
+Global miss rate: 0.057
+check 23 FH lookup hit: 30770, FH lookup miss, global hit: 236, lookup miss: 1905
+FH miss rate: 0.065
+Global miss rate: 0.058
+FH lookup hit: 28275, FH lookup miss, global hit: 203, lookup miss: 1980
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 31702, FH lookup miss, global hit: 205, lookup miss: 1931
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 44365, FH lookup miss, global hit: 209, lookup miss: 1945
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 29841, FH lookup miss, global hit: 198, lookup miss: 1918
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 31984, FH lookup miss, global hit: 236, lookup miss: 2016
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 36123, FH lookup miss, global hit: 222, lookup miss: 1928
+FH miss rate: 0.056
+Global miss rate: 0.050
+FH lookup hit: 42563, FH lookup miss, global hit: 209, lookup miss: 2025
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 27927, FH lookup miss, global hit: 223, lookup miss: 1987
+FH miss rate: 0.073
+Global miss rate: 0.066
+FH lookup hit: 37234, FH lookup miss, global hit: 221, lookup miss: 2066
+FH miss rate: 0.058
+Global miss rate: 0.052
+FH lookup hit: 42520, FH lookup miss, global hit: 204, lookup miss: 1912
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 31844, FH lookup miss, global hit: 184, lookup miss: 1901
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 32353, FH lookup miss, global hit: 228, lookup miss: 1911
+FH miss rate: 0.062
+Global miss rate: 0.055
+FH lookup hit: 31288, FH lookup miss, global hit: 195, lookup miss: 2041
+FH miss rate: 0.067
+Global miss rate: 0.061
+FH lookup hit: 30902, FH lookup miss, global hit: 207, lookup miss: 1973
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 32553, FH lookup miss, global hit: 184, lookup miss: 1977
+FH miss rate: 0.062
+Global miss rate: 0.057
+check 24 FH lookup hit: 32411, FH lookup miss, global hit: 251, lookup miss: 1987
+FH miss rate: 0.065
+Global miss rate: 0.057
+FH lookup hit: 29783, FH lookup miss, global hit: 213, lookup miss: 2085
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 33365, FH lookup miss, global hit: 223, lookup miss: 2017
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 46608, FH lookup miss, global hit: 214, lookup miss: 2036
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 31362, FH lookup miss, global hit: 209, lookup miss: 2013
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 33667, FH lookup miss, global hit: 245, lookup miss: 2130
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 38025, FH lookup miss, global hit: 232, lookup miss: 2056
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 44754, FH lookup miss, global hit: 220, lookup miss: 2131
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 29358, FH lookup miss, global hit: 231, lookup miss: 2082
+FH miss rate: 0.073
+Global miss rate: 0.066
+FH lookup hit: 39227, FH lookup miss, global hit: 230, lookup miss: 2167
+FH miss rate: 0.058
+Global miss rate: 0.052
+FH lookup hit: 44745, FH lookup miss, global hit: 214, lookup miss: 2010
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 33602, FH lookup miss, global hit: 194, lookup miss: 2000
+FH miss rate: 0.061
+Global miss rate: 0.056
+FH lookup hit: 33914, FH lookup miss, global hit: 243, lookup miss: 2017
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 32865, FH lookup miss, global hit: 205, lookup miss: 2129
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 32555, FH lookup miss, global hit: 221, lookup miss: 2062
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 34218, FH lookup miss, global hit: 196, lookup miss: 2097
+FH miss rate: 0.063
+Global miss rate: 0.057
+check 25 FH lookup hit: 33156, FH lookup miss, global hit: 253, lookup miss: 2036
+FH miss rate: 0.065
+Global miss rate: 0.057
+FH lookup hit: 30400, FH lookup miss, global hit: 223, lookup miss: 2122
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 34075, FH lookup miss, global hit: 227, lookup miss: 2065
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 47626, FH lookup miss, global hit: 216, lookup miss: 2072
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 32009, FH lookup miss, global hit: 213, lookup miss: 2049
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 34340, FH lookup miss, global hit: 256, lookup miss: 2166
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 38798, FH lookup miss, global hit: 235, lookup miss: 2099
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 45673, FH lookup miss, global hit: 223, lookup miss: 2180
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 29943, FH lookup miss, global hit: 235, lookup miss: 2131
+FH miss rate: 0.073
+Global miss rate: 0.066
+FH lookup hit: 40052, FH lookup miss, global hit: 234, lookup miss: 2202
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 45721, FH lookup miss, global hit: 216, lookup miss: 2046
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 34276, FH lookup miss, global hit: 200, lookup miss: 2050
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 34628, FH lookup miss, global hit: 245, lookup miss: 2061
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 33513, FH lookup miss, global hit: 208, lookup miss: 2171
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 33226, FH lookup miss, global hit: 226, lookup miss: 2104
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 34942, FH lookup miss, global hit: 200, lookup miss: 2128
+FH miss rate: 0.062
+Global miss rate: 0.057
+check 26 FH lookup hit: 33264, FH lookup miss, global hit: 254, lookup miss: 2047
+FH miss rate: 0.065
+Global miss rate: 0.058
+FH lookup hit: 30499, FH lookup miss, global hit: 223, lookup miss: 2129
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 34171, FH lookup miss, global hit: 227, lookup miss: 2073
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 47806, FH lookup miss, global hit: 217, lookup miss: 2080
+FH miss rate: 0.046
+Global miss rate: 0.042
+FH lookup hit: 32106, FH lookup miss, global hit: 213, lookup miss: 2053
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 34457, FH lookup miss, global hit: 256, lookup miss: 2172
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 38935, FH lookup miss, global hit: 235, lookup miss: 2104
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 45828, FH lookup miss, global hit: 223, lookup miss: 2188
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 30034, FH lookup miss, global hit: 237, lookup miss: 2134
+FH miss rate: 0.073
+Global miss rate: 0.066
+FH lookup hit: 40182, FH lookup miss, global hit: 234, lookup miss: 2205
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 45873, FH lookup miss, global hit: 216, lookup miss: 2053
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 34369, FH lookup miss, global hit: 200, lookup miss: 2057
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 34740, FH lookup miss, global hit: 247, lookup miss: 2065
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 33628, FH lookup miss, global hit: 209, lookup miss: 2175
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 33342, FH lookup miss, global hit: 226, lookup miss: 2114
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 35044, FH lookup miss, global hit: 200, lookup miss: 2139
+FH miss rate: 0.063
+Global miss rate: 0.057
+end time: 2024/03/12-20:10:44.839439
+
+
+** Compaction Stats [default] **
+Level    Files   Size     Score Read(GB)  Rn(GB) Rnp1(GB) Write(GB) Wnew(GB) Moved(GB) W-Amp Rd(MB/s) Wr(MB/s) Comp(sec) CompMergeCPU(sec) Comp(cnt) Avg(sec) KeyIn KeyDrop Rblob(GB) Wblob(GB)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  L3      3/0   248.50 MB   1.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+  L4     17/0   818.79 MB   0.9      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+  L5    166/0    8.85 GB   1.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+  L6   1549/0   88.85 GB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+ Sum   1735/0   98.74 GB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+ Int      0/0    0.00 KB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      0.0      0.00              0.00         0    0.000       0      0       0.0       0.0
+
+** Compaction Stats [default] **
+Priority    Files   Size     Score Read(GB)  Rn(GB) Rnp1(GB) Write(GB) Wnew(GB) Moved(GB) W-Amp Rd(MB/s) Wr(MB/s) Comp(sec) CompMergeCPU(sec) Comp(cnt) Avg(sec) KeyIn KeyDrop Rblob(GB) Wblob(GB)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Blob file count: 0, total size: 0.0 GB, garbage size: 0.0 GB, space amp: 0.0
+
+Uptime(secs): 71.4 total, 71.4 interval
+Flush(GB): cumulative 0.000, interval 0.000
+AddFile(GB): cumulative 0.000, interval 0.000
+AddFile(Total Files): cumulative 0, interval 0
+AddFile(L0 Files): cumulative 0, interval 0
+AddFile(Keys): cumulative 0, interval 0
+Cumulative compaction: 0.00 GB write, 0.00 MB/s write, 0.00 GB read, 0.00 MB/s read, 0.0 seconds
+Interval compaction: 0.00 GB write, 0.00 MB/s write, 0.00 GB read, 0.00 MB/s read, 0.0 seconds
+Estimated pending compaction bytes: 0
+Write Stall (count): cf-l0-file-count-limit-delays-with-ongoing-compaction: 0, cf-l0-file-count-limit-stops-with-ongoing-compaction: 0, l0-file-count-limit-delays: 0, l0-file-count-limit-stops: 0, memtable-limit-delays: 0, memtable-limit-stops: 0, pending-compaction-bytes-delays: 0, pending-compaction-bytes-stops: 0, total-delays: 0, total-stops: 0
+Block cache FHLRUCache@0x55721df760d0#263352 capacity: 30.00 GB seed: 456922610 usage: 0.10 KB table_size: 256 occupancy: 1 collections: 1 last_copies: 0 last_secs: 0.000271 secs_since: 246
+Block cache entry stats(count,size,portion): Misc(1,0.00 KB,0%)
+
+** File Read Latency Histogram By Level [default] **
+** Level 3 read latency histogram (micros):
+Count: 294 Average: 108.2041  StdDev: 27.24
+Min: 68  Median: 103.7973  Max: 210
+Percentiles: P50: 103.80 P75: 135.14 P99: 210.00 P99.9: 210.00 P99.99: 210.00
+------------------------------------------------------
+(      51,      76 ]       26   8.844%   8.844% ##
+(      76,     110 ]      148  50.340%  59.184% ##########
+(     110,     170 ]      111  37.755%  96.939% ########
+(     170,     250 ]        9   3.061% 100.000% #
+
+** Level 4 read latency histogram (micros):
+Count: 2353 Average: 109.7068  StdDev: 30.00
+Min: 68  Median: 107.3193  Max: 338
+Percentiles: P50: 107.32 P75: 140.56 P99: 234.23 P99.9: 318.82 P99.99: 338.00
+------------------------------------------------------
+(      51,      76 ]      236  10.030%  10.030% ##
+(      76,     110 ]     1021  43.391%  53.421% #########
+(     110,     170 ]      997  42.371%  95.793% ########
+(     170,     250 ]       94   3.995%  99.788% #
+(     250,     380 ]        5   0.212% 100.000% 
+
+** Level 5 read latency histogram (micros):
+Count: 358091 Average: 110.3350  StdDev: 36.44
+Min: 61  Median: 106.1954  Max: 5228
+Percentiles: P50: 106.20 P75: 139.19 P99: 233.16 P99.9: 309.03 P99.99: 376.28
+------------------------------------------------------
+(      51,      76 ]    31945   8.921%   8.921% ##
+(      76,     110 ]   165635  46.255%  55.176% #########
+(     110,     170 ]   145905  40.745%  95.921% ########
+(     170,     250 ]    13965   3.900%  99.821% #
+(     250,     380 ]      623   0.174%  99.995% 
+(     380,     580 ]       35   0.010% 100.005% 
+(     580,     870 ]        6   0.002% 100.006% 
+(     870,    1300 ]        2   0.001% 100.007% 
+(    1300,    1900 ]        3   0.001% 100.008% 
+(    1900,    2900 ]        3   0.001% 100.009% 
+(    2900,    4400 ]        7   0.002% 100.011% 
+(    4400,    6600 ]        2   0.001% 100.011% 
+
+** Level 6 read latency histogram (micros):
+Count: 2998295 Average: 110.2795  StdDev: 33.85
+Min: 61  Median: 105.8565  Max: 6065
+Percentiles: P50: 105.86 P75: 138.42 P99: 222.53 P99.9: 241.54 P99.99: 243.44
+------------------------------------------------------
+(      51,      76 ]   281401   9.385%   9.385% ##
+(      76,     110 ]  1386745  46.251%  55.636% #########
+(     110,     170 ]  1225605  40.877%  96.513% ########
+(     170,     250 ]   113557   3.787% 100.301% #
+(     250,     380 ]     4790   0.160% 100.460% 
+(     380,     580 ]      363   0.012% 100.472% 
+(     580,     870 ]       38   0.001% 100.474% 
+(     870,    1300 ]       11   0.000% 100.474% 
+(    1300,    1900 ]       15   0.001% 100.475% 
+(    1900,    2900 ]       25   0.001% 100.475% 
+(    2900,    4400 ]       38   0.001% 100.477% 
+(    4400,    6600 ]       11   0.000% 100.477% 
+
+
+** DB Stats **
+Uptime(secs): 71.4 total, 71.4 interval
+Cumulative writes: 0 writes, 0 keys, 0 commit groups, 0.0 writes per commit group, ingest: 0.00 GB, 0.00 MB/s
+Cumulative WAL: 0 writes, 0 syncs, 0.00 writes per sync, written: 0.00 GB, 0.00 MB/s
+Cumulative stall: 00:00:0.000 H:M:S, 0.0 percent
+Interval writes: 0 writes, 0 keys, 0 commit groups, 0.0 writes per commit group, ingest: 0.00 MB, 0.00 MB/s
+Interval WAL: 0 writes, 0 syncs, 0.00 writes per sync, written: 0.00 GB, 0.00 MB/s
+Interval stall: 00:00:0.000 H:M:S, 0.0 percent
+Write Stall (count): write-buffer-manager-limit-stops: 0
+
+==================================================================
+-----------configuration------------
+WAL: 1, fsync: 1
+Data: /home/spdk/p4510/FH_Rocksdb_Data/data
+WAL: /home/spdk/p4510/FH_Rocksdb_Data/log
+Max_write_buffer_number: 4
+Max_background_jobs: 8
+High-priority backgd threds: 2
+Low-priority backgd threds: 6
+Max_subcompactions: 1
+Write_buffer_size: 1.000 GB
+-------------------------------------
+write done by self: 0
+WAL sync num: 0
+WAL write: 0.000 GB
+compaction read: 0.000 GB, compaction write: 0.000 GB
+flush write: 0.000 GB
+flush time: 0.000 s
+WAL sync time per request: 0.000 us
+WAL sync time per sync: -nan us
+Wait time: 0.000 us
+Complete wait time: 0.000 us
+Write delay time: 0.000 us
+Write memtable time: 0.000
+Finish 20000000 requests in 71.434 seconds.
+check 27 FH lookup hit: 33373, FH lookup miss, global hit: 254, lookup miss: 2051
+FH miss rate: 0.065
+Global miss rate: 0.057
+FH lookup hit: 30588, FH lookup miss, global hit: 223, lookup miss: 2140
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 34275, FH lookup miss, global hit: 228, lookup miss: 2079
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 47963, FH lookup miss, global hit: 217, lookup miss: 2086
+FH miss rate: 0.046
+Global miss rate: 0.041
+FH lookup hit: 32213, FH lookup miss, global hit: 213, lookup miss: 2059
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 34546, FH lookup miss, global hit: 258, lookup miss: 2177
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 39077, FH lookup miss, global hit: 235, lookup miss: 2109
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 45962, FH lookup miss, global hit: 223, lookup miss: 2193
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 30110, FH lookup miss, global hit: 238, lookup miss: 2139
+FH miss rate: 0.073
+Global miss rate: 0.066
+FH lookup hit: 40312, FH lookup miss, global hit: 236, lookup miss: 2214
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 46006, FH lookup miss, global hit: 219, lookup miss: 2056
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 34470, FH lookup miss, global hit: 200, lookup miss: 2062
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 34851, FH lookup miss, global hit: 247, lookup miss: 2073
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 33739, FH lookup miss, global hit: 209, lookup miss: 2183
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 33438, FH lookup miss, global hit: 227, lookup miss: 2118
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 35156, FH lookup miss, global hit: 202, lookup miss: 2144
+FH miss rate: 0.063
+Global miss rate: 0.057
+read num: 10000000, read avg latency: 203.340 us, read median latency: 177.738 us
+read P999: 711.469 us, P99: 542.869 us, P95: 408.742 us, P90: 344.911 us, P75: 245.302 us
+update num: 0, update avg latency: 0 us, update median latency: 0 us
+update P999: 0 us, P99: 0 us, P95: 0 us, P90: 0 us, P75: 0 us
+Work latency: 203.340 us
+Work IOPS: 279.980 K (end to end latency: 228.587 us)
+Work median latency: 177.738 us
+Work P999: 711.469us, P99: 542.869us, P95: 408.742us, P90: 344.911us, P75: 245.302us
+Stall: 0.000 us
+Stall rate: 0.000 
+Block read time: 38.661 us (count: 10000000)
+Block avg read time: 114.535 us (count: 3375455)
+block cache hit ratio: 0.945 (hit: 58420689, miss: 3375455)
+block cache add failures: 0
+block cache index hit ratio: -nan (hit: 0, miss: 0)
+block cache filter hit ratio: -nan (hit: 0, miss: 0)
+block cache data hit ratio: 0.945 (hit: 58420689, miss: 3375455)
+block cache bytes read: 253190159536, write: 14609914832
+memtable hit ratio: 0.000 (hit: 0, miss: 20000000)
+submit_time: 0.000
+==================================================================
+Finish experiment
+check 28 FH lookup hit: 33373, FH lookup miss, global hit: 254, lookup miss: 2051
+FH miss rate: 0.065
+Global miss rate: 0.057
+FH lookup hit: 30588, FH lookup miss, global hit: 223, lookup miss: 2140
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 34275, FH lookup miss, global hit: 228, lookup miss: 2079
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 47963, FH lookup miss, global hit: 217, lookup miss: 2086
+FH miss rate: 0.046
+Global miss rate: 0.041
+FH lookup hit: 32213, FH lookup miss, global hit: 213, lookup miss: 2059
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 34546, FH lookup miss, global hit: 258, lookup miss: 2177
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 39077, FH lookup miss, global hit: 235, lookup miss: 2109
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 45962, FH lookup miss, global hit: 223, lookup miss: 2193
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 30110, FH lookup miss, global hit: 238, lookup miss: 2139
+FH miss rate: 0.073
+Global miss rate: 0.066
+FH lookup hit: 40312, FH lookup miss, global hit: 236, lookup miss: 2214
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 46006, FH lookup miss, global hit: 219, lookup miss: 2056
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 34470, FH lookup miss, global hit: 200, lookup miss: 2062
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 34851, FH lookup miss, global hit: 247, lookup miss: 2073
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 33739, FH lookup miss, global hit: 209, lookup miss: 2183
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 33438, FH lookup miss, global hit: 227, lookup miss: 2118
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 35156, FH lookup miss, global hit: 202, lookup miss: 2144
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 33373, FH lookup miss, global hit: 254, lookup miss: 2051
+FH miss rate: 0.065
+Global miss rate: 0.057
+FH lookup hit: 30588, FH lookup miss, global hit: 223, lookup miss: 2140
+FH miss rate: 0.072
+Global miss rate: 0.065
+FH lookup hit: 34275, FH lookup miss, global hit: 228, lookup miss: 2079
+FH miss rate: 0.063
+Global miss rate: 0.057
+FH lookup hit: 47963, FH lookup miss, global hit: 217, lookup miss: 2086
+FH miss rate: 0.046
+Global miss rate: 0.041
+FH lookup hit: 32213, FH lookup miss, global hit: 213, lookup miss: 2059
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 34546, FH lookup miss, global hit: 258, lookup miss: 2177
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 39077, FH lookup miss, global hit: 235, lookup miss: 2109
+FH miss rate: 0.057
+Global miss rate: 0.051
+FH lookup hit: 45962, FH lookup miss, global hit: 223, lookup miss: 2193
+FH miss rate: 0.050
+Global miss rate: 0.045
+FH lookup hit: 30110, FH lookup miss, global hit: 238, lookup miss: 2139
+FH miss rate: 0.073
+Global miss rate: 0.066
+FH lookup hit: 40312, FH lookup miss, global hit: 236, lookup miss: 2214
+FH miss rate: 0.057
+Global miss rate: 0.052
+FH lookup hit: 46006, FH lookup miss, global hit: 219, lookup miss: 2056
+FH miss rate: 0.047
+Global miss rate: 0.043
+FH lookup hit: 34470, FH lookup miss, global hit: 200, lookup miss: 2062
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 34851, FH lookup miss, global hit: 247, lookup miss: 2073
+FH miss rate: 0.062
+Global miss rate: 0.056
+FH lookup hit: 33739, FH lookup miss, global hit: 209, lookup miss: 2183
+FH miss rate: 0.066
+Global miss rate: 0.060
+FH lookup hit: 33438, FH lookup miss, global hit: 227, lookup miss: 2118
+FH miss rate: 0.066
+Global miss rate: 0.059
+FH lookup hit: 35156, FH lookup miss, global hit: 202, lookup miss: 2144
+FH miss rate: 0.063
+Global miss rate: 0.057
+end monitor
