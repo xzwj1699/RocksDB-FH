@@ -1,7 +1,7 @@
 
 PROJECT(ycsb)
 #SET(CMAKE_VERBOSE_MAKEFILE on)
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.10)
 SET(CMAKE_CXX_FLAGS  " -Wl,--rpath=./lib/ -m64 -Wall -O0 -pthread -std=c++17 -fPIC -fopenmp")
 
 # SET(SRC_LIST rocksdb/rocksdb_test2.cc rocksdb/rocksdb_client2.cc core/core_workload.cc)
