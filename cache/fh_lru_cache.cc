@@ -533,6 +533,7 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
                                  Cache::CreateContext* /*create_context*/,
                                  Cache::Priority /*priority*/,
                                  Statistics* /*stats*/) {
+  auto t1 = std::chrono::steady_clock::now();
   if (status_iops)
     handle_req_num.fetch_add(1);
   bool sample = RandomSample();
@@ -545,6 +546,8 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
       e->Ref();
       if (sample)
         _fh_lookup_succ++;
+      auto t2 = std::chrono::steady_clock::now();
+      std::cout << "fh lookup succ latency: " << (t2 - t1).count() << std::endl;
       return e;
     } else {
       status_change = true;
@@ -572,9 +575,13 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
     e->SetHit();
     if (sample) 
       _lookup_succ++;
+    auto t3 = std::chrono::steady_clock::now();
+    std::cout << "global lookup succ latency: " << (t3 - t1).count() << std::endl;
   } else {
     if (sample)
       _lookup_fail++;
+    auto t4 = std::chrono::steady_clock::now();
+    std::cout << "lookup fail latency: " << (t4 - t1).count() << std::endl;
   }
   return e;
 }
