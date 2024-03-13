@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # workload configuration file
-workloads=("workloadc.spec")
+workloads=("workloada.spec" "workloadb.spec" "workloadc.spec" "workloadd.spec" "workloade.spec" "workloadf.spec")
 # database data directory
 data_dir="/home/spdk/p4510/FH_Rocksdb_Data"
 # data_dir="/home/xzwj1699/rocksdb/ycsb/rocksdb_data"
@@ -38,6 +38,9 @@ for db in "${dbnames[@]}";
 do
     for workload in "${workloads[@]}";
     do
+        if [ "$workload" != "workloadc.spec" ];then
+            cp="1"
+        fi
         for t in "${threads[@]}";
         do
             for m in "${memorys[@]}";
@@ -53,7 +56,11 @@ do
                             echo "workloads/""$workload" "$t" "$outdata" "$outlog" \
                             "$m" "$isload" "$db" "$size" "$warm" "$request_num" "$cp" "$req_size" "$seg" "$cache"
                             ./build/rocksdb2 "workloads/""$workload" "$t" "$outdata" "$outlog" \
-                            "$m" "$isload" "$db" "$size" "$warm" "$request_num" "$cp" "$req_size" "$seg" "$cache" | tee "$cache"".log"
+                            "$m" "$isload" "$db" "$size" "$warm" "$request_num" "$cp" "$req_size" "$seg" "$cache" | tee "$cache""-""$workload"".log"
+                            if [ "$cp" == "1" ];then
+                                rm -rf "$data_dir"
+                                cp -r "$rocksdb_base" "$data_dir"
+                            fi
                         done
                     done
                 done
