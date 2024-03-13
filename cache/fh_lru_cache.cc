@@ -449,7 +449,7 @@ void FHLRUCacheShard::NotifyEvicted(
 }
 
 bool FHLRUCacheShard::RandomSample() {
-  return (double)std::rand() / (RAND_MAX) < 1.0 / GRANULARITY;
+  return (double)(my_random::ConcurrentRandom::GetTLSInstance()->Next()) / (RAND_MAX) < 1.0 / GRANULARITY;
 }
 
 void FHLRUCacheShard::SetCapacity(size_t capacity) {
@@ -533,9 +533,9 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
                                  Cache::CreateContext* /*create_context*/,
                                  Cache::Priority /*priority*/,
                                  Statistics* /*stats*/) {
-  auto t1 = std::chrono::steady_clock::now();
+  // auto t1 = std::chrono::steady_clock::now();
   if (status_iops)
-    handle_req_num.fetch_add(1);
+    handle_req_num++;
   bool sample = RandomSample();
   bool status_change = false;
   if (FH_ready) {
@@ -544,10 +544,11 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
     FHLRUHandle* e = FH_table_.FH_Lookup(key, hash);
     if (e != nullptr && !e->IsTomb()) {
       e->Ref();
-      if (sample)
+      if (sample) {
         _fh_lookup_succ++;
-      auto t2 = std::chrono::steady_clock::now();
-      std::cout << "fh lookup succ latency: " << (t2 - t1).count() << std::endl;
+        // auto t2 = std::chrono::steady_clock::now();
+        // std::cout << "fh lookup succ latency: " << (t2 - t1).count() << std::endl;
+      }
       return e;
     } else {
       status_change = true;
@@ -573,15 +574,17 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
     }
     e->Ref();
     e->SetHit();
-    if (sample) 
+    if (sample) {
       _lookup_succ++;
-    auto t3 = std::chrono::steady_clock::now();
-    std::cout << "global lookup succ latency: " << (t3 - t1).count() << std::endl;
+      // auto t3 = std::chrono::steady_clock::now();
+      // std::cout << "global lookup succ latency: " << (t3 - t1).count() << std::endl;
+    }
   } else {
-    if (sample)
+    if (sample) {
       _lookup_fail++;
-    auto t4 = std::chrono::steady_clock::now();
-    std::cout << "lookup fail latency: " << (t4 - t1).count() << std::endl;
+      // auto t4 = std::chrono::steady_clock::now();
+      // std::cout << "lookup fail latency: " << (t4 - t1).count() << std::endl;
+    }
   }
   return e;
 }
@@ -1091,9 +1094,9 @@ void FHLRUCache::FH_Scheduler() {
   // typedef duration<double, std::ratio<1, 100000>> micro_sec_t;
   // tp start_query;
   int count = 0;
-  printf("Large Granularity: %d\n", LARGE_GRANULARITY);
-  printf("QUERY_INTERVAL: %.2lf s\n", QUERY_INTERVAL_US/1000/1000);
-  printf("WAIT_DYNAMIC_SLEEP_INTERVAL_US: %.2lf s\n", WAIT_DYNAMIC_SLEEP_INTERVAL_US/1000/1000);
+  // printf("Large Granularity: %d\n", LARGE_GRANULARITY);
+  // printf("QUERY_INTERVAL: %.2lf s\n", QUERY_INTERVAL_US/1000/1000);
+  // printf("WAIT_DYNAMIC_SLEEP_INTERVAL_US: %.2lf s\n", WAIT_DYNAMIC_SLEEP_INTERVAL_US/1000/1000);
   WAIT_STABLE:
   double last_miss_ratio = 1.1;
   double miss_ratio = 0;
@@ -1105,24 +1108,24 @@ void FHLRUCache::FH_Scheduler() {
     // printf("Now shard usage is %ld, capacity is: %ld\n", usage, GetShard(0).capacity_);
     if (last_usage < usage) {
       last_usage = usage;
-      printf("(shard %d) miss ratio = %.5lf -> %.5lf with usage_: %ld\n",
-                0, last_miss_ratio, miss_ratio, usage);
+      // printf("(shard %d) miss ratio = %.5lf -> %.5lf with usage_: %ld\n",
+      //           0, last_miss_ratio, miss_ratio, usage);
       last_miss_ratio = miss_ratio;
       usleep(WAIT_STABLE_SLEEP_INTERVAL_US);
     } else {
-      printf("(shard %d) miss ratio = %.5lf -> %.5lf\n",
-                0, last_miss_ratio, miss_ratio);
+      // printf("(shard %d) miss ratio = %.5lf -> %.5lf\n",
+      //           0, last_miss_ratio, miss_ratio);
       break;
     }
   }
-  printf("cache is stable\n");
+  // printf("cache is stable\n");
   fflush(stdout);
   if(miss_ratio > 0.55){
-    printf("miss ratio > 0.55, miss ratio: %lf\n", miss_ratio);
+    // printf("miss ratio > 0.55, miss ratio: %lf\n", miss_ratio);
     goto WAIT_STABLE;
   }
   // auto start_learning = sys_clk_t::now();
-  printf("start tuning\n");
+  // printf("start tuning\n");
   double sleep_ratio = 0;
   Learning_Input_Node sleep_node;
   Learning_Input_Node last_sleep_node(-1, 0);
@@ -1136,7 +1139,7 @@ void FHLRUCache::FH_Scheduler() {
     sleep_ratio = sleep_node.ratio_;
     if(abs(sleep_node.granularity_) < GetShard(0).EPSILON) {
       GetShard(0).best_sleep = sleep_ratio;
-      printf("best sleep ratio: %.2lf, best miss: %.1lf\n", GetShard(0).best_sleep, sleep_ratio);
+      // printf("best sleep ratio: %.2lf, best miss: %.1lf\n", GetShard(0).best_sleep, sleep_ratio);
       break;
     } else if (abs(sleep_ratio) < GetShard(0).EPSILON) {
       GetShard(0)._reset_FH();
@@ -1150,7 +1153,7 @@ void FHLRUCache::FH_Scheduler() {
     }
     for (int i = 0; i < 1 && FH_status; i++) {
       if (! GetShard(0).ConstructFromRatio(sleep_ratio)) {
-        printf("construct fail\n");
+        // printf("construct fail\n");
         miss_ratio_array[i] = 0;
         continue;
       } else {
@@ -1171,7 +1174,7 @@ void FHLRUCache::FH_Scheduler() {
     median_miss_ratio = miss_ratio_array[0];
     last_sleep_node = sleep_node;
   }
-  printf("searching phase ");
+  // printf("searching phase ");
   // auto learning_time = (time_point_cast<micro_sec_t>(sys_clk_t::now()) - time_point_cast<micro_sec_t>(start_learning)).count() / 1000 / 1000;
   // printf("%.2lf s learning time\n", learning_time);
 
@@ -1192,7 +1195,7 @@ void FHLRUCache::FH_Scheduler() {
     for(size_t i = 0; i < pass_len; i++) {
       int shard_id = construct_container.front();
       if (!GetShard(shard_id).ConstructFromRatio(sleep_ratio)) {
-        printf("Construct fail %d!\n", shard_id);
+        // printf("Construct fail %d!\n", shard_id);
         i--;
         continue;
       }
@@ -1228,7 +1231,7 @@ void FHLRUCache::FH_Scheduler() {
     }
   }
 
-  printf("Construct phase: ");
+  // printf("Construct phase: ");
 
   // auto construct_time = (time_point_cast<micro_sec_t>(sys_clk_t::now()) - time_point_cast<micro_sec_t>(start_construct)).count() / 1000 / 1000;
   // printf("%.2lf s construct time\n", construct_time);
@@ -1242,7 +1245,7 @@ void FHLRUCache::FH_Scheduler() {
   while (FH_status) {
     count++;
     usleep(WAIT_DYNAMIC_SLEEP_INTERVAL_US);
-    printf("check %d ", count);
+    // printf("check %d ", count);
     for(uint32_t i = 0; i < GetNumShards(); i++) {
       //miss_ratio = shards_[i]._print_reset_FH();
       if(!construct_container.empty() && i == (uint32_t)construct_container.front()){
@@ -1259,7 +1262,7 @@ void FHLRUCache::FH_Scheduler() {
     if(!fail_list.empty() && i == (uint32_t)fail_list.front()){
         fail_list.pop();
         construct_container.pop();
-        printf("skip %d\n", i);
+        // printf("skip %d\n", i);
         GetShard(i)._print_FH();
         continue;
     }
@@ -1274,14 +1277,14 @@ void FHLRUCache::FH_Scheduler() {
     // printf("query %.2lf s v.s. construct %.2lf s\n", query_time, construct_time);
     if(count > 5) {
       sleep(10);
-      printf("go back to construct\n");
+      // printf("go back to construct\n");
       goto CONSTRUCT;
     } else {
-      printf("go back to wait stable\n");
+      // printf("go back to wait stable\n");
       goto WAIT_STABLE;
     }
   }
-  printf("end monitor\n");
+  // printf("end monitor\n");
 }
 
 Cache::ObjectPtr FHLRUCache::Value(Handle* handle) {
