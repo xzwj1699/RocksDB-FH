@@ -419,7 +419,6 @@ void RocksDBClient2::RocksDBWorker(uint64_t num, int coreid, bool is_warmup, boo
 	TimeRecord request_time(num + 1);
 	TimeRecord read_time(num + 1);
 	TimeRecord update_time(num + 1);
-	std::cout << "Starting a new RocksDB worker thread, thread id: " << coreid << std::endl;
 
 	if(!is_warmup && is_master){
 		printf("starting requests...\n");
@@ -463,10 +462,6 @@ void RocksDBClient2::RocksDBWorker(uint64_t num, int coreid, bool is_warmup, boo
 				printf("read latency: %s 0\n", time.c_str());
 			}
 		}*/
-		// if(!FH_Get_Status()){
-		// 	printf("fh get status break out\n");
-		// 	break;
-		// }
 		WorkloadWrapper::Request *req = workload_wrapper_->GetRequest(offset + i * worker_threads_);
 		ycsbc::Operation opt = req->Type();
 		assert(req != nullptr);
@@ -859,7 +854,7 @@ void RocksDBClient2::RocksdDBLoader(uint64_t num, int coreid){
 	// WorkloadWrapper::Request *next_req = nullptr;
 	//std::string w_value(1024, 'a');
 
-	std::cout << "RocksDB loader start, current thread id: " << coreid << std::endl;
+	// std::cout << "RocksDB loader start, current thread id: " << coreid << std::endl;
 
 	for(uint64_t i=0; i<num; i++){
 		/*next_req = workload_wrapper_->GetNextRequest();

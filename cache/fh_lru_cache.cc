@@ -926,6 +926,7 @@ bool FHLRUCacheShard::ConstructFromMarker() {
 }
 
 void FHLRUCacheShard::Deconstruct() {
+  if (FH_ready == false) return;
   autovector<FHLRUHandle*> last_reference_list;
   DMutexLock l(mutex_);
   FH_ready = false;
@@ -975,13 +976,21 @@ void FHLRUCacheShard::Deconstruct() {
 
 inline double FHLRUCacheShard::_get_reset_miss_ratio() {
   double tmp;
-  // std::cout << "lookup fail: " << _lookup_fail << " lookup succ: " << _lookup_succ << std::endl;
   if (_lookup_fail + _lookup_succ == 0)
     tmp = 1.0;
   else
     tmp = _lookup_fail * 1.0 / (_lookup_fail + _lookup_succ);
   _lookup_fail = 0;
   _lookup_succ = 0;
+  return tmp;
+}
+
+inline double FHLRUCacheShard::_get_miss_ratio() {
+  double tmp;
+  if (_lookup_fail + _lookup_succ == 0)
+    tmp = 1.0;
+  else
+    tmp = _lookup_fail * 1.0 / (_lookup_fail + _lookup_succ);
   return tmp;
 }
 
@@ -1087,18 +1096,11 @@ Learning_Input_Node FHLRUCacheShard::learning_machine(Learning_Input_Node last_s
 }
 
 void FHLRUCache::FH_Scheduler() {
-  // double tp;
-  // using namespace std::chrono;
-  // typedef system_clock sys_clk_t;
-  // typedef system_clock::time_point tp;
-  // typedef duration<double, std::ratio<1, 100000>> micro_sec_t;
-  // tp start_query;
   int count = 0;
-  // printf("Large Granularity: %d\n", LARGE_GRANULARITY);
-  // printf("QUERY_INTERVAL: %.2lf s\n", QUERY_INTERVAL_US/1000/1000);
-  // printf("WAIT_DYNAMIC_SLEEP_INTERVAL_US: %.2lf s\n", WAIT_DYNAMIC_SLEEP_INTERVAL_US/1000/1000);
+  // Map from shard id to shard baseline performance
+  std::map<int, double> baseline_performance;
   WAIT_STABLE:
-  double last_miss_ratio = 1.1;
+  // double last_miss_ratio = 1.1;
   double miss_ratio = 0;
   size_t last_usage = 0, usage;
   sleep(10);
@@ -1110,7 +1112,7 @@ void FHLRUCache::FH_Scheduler() {
       last_usage = usage;
       // printf("(shard %d) miss ratio = %.5lf -> %.5lf with usage_: %ld\n",
       //           0, last_miss_ratio, miss_ratio, usage);
-      last_miss_ratio = miss_ratio;
+      // last_miss_ratio = miss_ratio;
       usleep(WAIT_STABLE_SLEEP_INTERVAL_US);
     } else {
       // printf("(shard %d) miss ratio = %.5lf -> %.5lf\n",
@@ -1164,7 +1166,7 @@ void FHLRUCache::FH_Scheduler() {
       status_iops = true;
       GetShard(0).handle_req_num = 0;
       usleep(QUERY_INTERVAL_US);
-      GetShard(0)._print_FH();
+      // GetShard(0)._print_FH();
       miss_ratio = GetShard(0)._print_iops_FH();
       // GetShard(0)._print_FH();
       status_iops = false;
@@ -1195,13 +1197,16 @@ void FHLRUCache::FH_Scheduler() {
     for(size_t i = 0; i < pass_len; i++) {
       int shard_id = construct_container.front();
       if (!GetShard(shard_id).ConstructFromRatio(sleep_ratio)) {
-        // printf("Construct fail %d!\n", shard_id);
+        // Decrement loop variant, will go back to try to construct 
+        // FH again in next loop
         i--;
         continue;
       }
+      // Pop the front, and push to back
       construct_container.pop();
       construct_container.push(shard_id);
     }
+    // Finished construct Frozen-Hot, reset FH status count
     for (size_t i = 0; i < pass_len; i++) {
       int shard_id = construct_container.front();
       GetShard(shard_id)._reset_FH();
@@ -1209,13 +1214,13 @@ void FHLRUCache::FH_Scheduler() {
       construct_container.push(shard_id);
     }
     usleep(QUERY_INTERVAL_US);
+    // Collect some basic infomation about hit/miss ratio
     for (size_t i = 0; i < pass_len; i++) {
       int shard_id = construct_container.front();
-      // printf("%ld:\n", i);
-      GetShard(shard_id)._print_FH();
+      baseline_performance[shard_id] = GetShard(shard_id)._get_miss_ratio();
+      // GetShard(shard_id)._print_FH();
       construct_container.pop();
     }
-    // printf("pass %d\n", pass_count++);
     if (pass_count > 4) {
       break;
     }
@@ -1233,28 +1238,29 @@ void FHLRUCache::FH_Scheduler() {
 
   // printf("Construct phase: ");
 
-  // auto construct_time = (time_point_cast<micro_sec_t>(sys_clk_t::now()) - time_point_cast<micro_sec_t>(start_construct)).count() / 1000 / 1000;
-  // printf("%.2lf s construct time\n", construct_time);
-
   if (fail_list.size() == GetNumShards())
     goto END;
 
-  // start_query = sys_clk_t::now();
-  // miss_ratio_count = GetShard(0).COUNT_THRESHOLD;
   count = 0;
   while (FH_status) {
     count++;
     usleep(WAIT_DYNAMIC_SLEEP_INTERVAL_US);
     // printf("check %d ", count);
     for(uint32_t i = 0; i < GetNumShards(); i++) {
-      //miss_ratio = shards_[i]._print_reset_FH();
       if(!construct_container.empty() && i == (uint32_t)construct_container.front()){
         construct_container.pop();
         construct_container.push(i);
         continue;
       }
-      // printf("%u:\n", i);
-      GetShard(i)._print_FH();
+      auto cur_miss_ratio = GetShard(i)._get_miss_ratio();
+      if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.8) {
+        // Indicate shard[i]'s performance is weaker than baseline
+        printf("shard %d hit ratio %lf is lower than baseline %lf, deconstruct\n", i, 1 - cur_miss_ratio, 1 - baseline_performance[i]);
+        fflush(stdout);
+        GetShard(i)._print_FH();
+        GetShard(i).Deconstruct();
+        fail_list.push(i);
+      }
     }
   }
   // DECONSTRUCT:
@@ -1271,12 +1277,10 @@ void FHLRUCache::FH_Scheduler() {
     GetShard(i).Deconstruct();
   }
   END:
-  // auto query_time = (time_point_cast<micro_sec_t>(sys_clk_t::now()) - time_point_cast<micro_sec_t>(start_query)).count() / 1000 / 1000;
-  // printf("%.2lf s query\n", query_time);
   if(FH_status){
     // printf("query %.2lf s v.s. construct %.2lf s\n", query_time, construct_time);
     if(count > 5) {
-      sleep(10);
+      // sleep(10);
       // printf("go back to construct\n");
       goto CONSTRUCT;
     } else {

@@ -254,7 +254,6 @@ class RocksDBClient2{
   			else
     			coreid = coreid * 2 + 3;
 			assert(coreid >= 0);*/
-			printf("client coreid: %d\n", coreid);
 			cpu_set_t mask;
 			CPU_ZERO(&mask);
 			CPU_SET(coreid, &mask);
