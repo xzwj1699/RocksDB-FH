@@ -1224,6 +1224,7 @@ void FHLRUCache::FH_Scheduler() {
     for (size_t i = 0; i < pass_len; i++) {
       int shard_id = construct_container.front();
       baseline_performance[shard_id] = GetShard(shard_id)._get_FH_miss_ratio();
+      GetShard(i)._reset_FH();
       // GetShard(shard_id)._print_FH();
       construct_container.pop();
     }
@@ -1265,6 +1266,7 @@ void FHLRUCache::FH_Scheduler() {
         fflush(stdout);
         GetShard(i)._print_FH();
         GetShard(i).Deconstruct();
+        GetShard(i)._reset_FH();
         fail_list.push(i);
       }
     }
@@ -1276,11 +1278,13 @@ void FHLRUCache::FH_Scheduler() {
         construct_container.pop();
         // printf("skip %d\n", i);
         GetShard(i)._print_FH();
+        GetShard(i)._reset_FH();
         continue;
     }
     // printf("%d\n", i);
     GetShard(i)._print_FH();
     GetShard(i).Deconstruct();
+    GetShard(i)._reset_FH();
   }
   END:
   if(FH_status){
