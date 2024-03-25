@@ -994,6 +994,12 @@ inline double FHLRUCacheShard::_get_miss_ratio() {
   return tmp;
 }
 
+inline double FHLRUCacheShard::_get_FH_miss_ratio() {
+  double tmp;
+  auto total = _lookup_fail + _lookup_succ + _fh_lookup_succ;
+  return (total - _fh_lookup_succ) * 1.0 / total;
+}
+
 inline double FHLRUCacheShard::_print_FH() {
   auto total = _lookup_fail + _lookup_succ + _fh_lookup_succ;
   double global;
@@ -1217,7 +1223,7 @@ void FHLRUCache::FH_Scheduler() {
     // Collect some basic infomation about hit/miss ratio
     for (size_t i = 0; i < pass_len; i++) {
       int shard_id = construct_container.front();
-      baseline_performance[shard_id] = GetShard(shard_id)._get_miss_ratio();
+      baseline_performance[shard_id] = GetShard(shard_id)._get_FH_miss_ratio();
       // GetShard(shard_id)._print_FH();
       construct_container.pop();
     }
@@ -1252,7 +1258,7 @@ void FHLRUCache::FH_Scheduler() {
         construct_container.push(i);
         continue;
       }
-      auto cur_miss_ratio = GetShard(i)._get_miss_ratio();
+      auto cur_miss_ratio = GetShard(i)._get_FH_miss_ratio();
       if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.8) {
         // Indicate shard[i]'s performance is weaker than baseline
         printf("shard %d hit ratio %lf is lower than baseline %lf, deconstruct\n", i, 1 - cur_miss_ratio, 1 - baseline_performance[i]);
