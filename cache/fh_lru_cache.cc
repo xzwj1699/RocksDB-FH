@@ -1105,7 +1105,14 @@ void FHLRUCache::FH_Scheduler() {
   int count = 0;
   // Map from shard id to shard baseline performance
   std::map<int, double> baseline_performance;
+  std::queue<int> fail_list;
   WAIT_STABLE:
+  while (!construct_container.empty()) {
+    construct_container.pop();
+  }
+  while (!fail_list.empty()) {
+    fail_list.pop();
+  }
   // double last_miss_ratio = 1.1;
   double miss_ratio = 0;
   size_t last_usage = 0, usage;
@@ -1232,7 +1239,6 @@ void FHLRUCache::FH_Scheduler() {
       break;
     }
   }
-  std::queue<int> fail_list;
   if (!construct_container.empty()) {
     auto size = construct_container.size();
     for (size_t i = 0; i < size; i++) {
