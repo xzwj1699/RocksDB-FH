@@ -1190,7 +1190,7 @@ void FHLRUCache::FH_Scheduler() {
     goto WAIT_STABLE;
   }
 
-  CONSTRUCT:
+  // CONSTRUCT:
   // auto start_construct = sys_clk_t::now();
   usleep(QUERY_INTERVAL_US);
 
@@ -1260,7 +1260,7 @@ void FHLRUCache::FH_Scheduler() {
         continue;
       }
       auto cur_miss_ratio = GetShard(i)._get_FH_miss_ratio();
-      if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.8) {
+      if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.5) {
         // Indicate shard[i]'s performance is weaker than baseline
         printf("shard %d hit ratio %lf is lower than baseline %lf, deconstruct\n", i, 1 - cur_miss_ratio, 1 - baseline_performance[i]);
         fflush(stdout);
@@ -1289,14 +1289,14 @@ void FHLRUCache::FH_Scheduler() {
   END:
   if(FH_status){
     // printf("query %.2lf s v.s. construct %.2lf s\n", query_time, construct_time);
-    if(count > 5) {
+    // if(count > 5) {
       // sleep(10);
       // printf("go back to construct\n");
-      goto CONSTRUCT;
-    } else {
+      // goto CONSTRUCT;
+    // } else {
       // printf("go back to wait stable\n");
       goto WAIT_STABLE;
-    }
+    // }
   }
   // printf("end monitor\n");
 }
