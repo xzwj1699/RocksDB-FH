@@ -1255,7 +1255,7 @@ void FHLRUCache::FH_Scheduler() {
     goto END;
 
   count = 0;
-  while (FH_status) {
+  while (FH_status && construct_container.size() != GetNumShards()) {
     count++;
     usleep(WAIT_DYNAMIC_SLEEP_INTERVAL_US);
     // printf("check %d ", count);
@@ -1273,7 +1273,7 @@ void FHLRUCache::FH_Scheduler() {
         GetShard(i)._print_FH();
         GetShard(i).Deconstruct();
         GetShard(i)._reset_FH();
-        fail_list.push(i);
+        construct_container.push(i);
       }
     }
   }
