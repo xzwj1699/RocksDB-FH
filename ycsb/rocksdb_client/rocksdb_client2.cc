@@ -276,11 +276,11 @@ void RocksDBClient2::Warmup(){
 	for(int i=0; i<worker_threads_; i++){
 #ifdef NUMA_O
 		if(base_coreid + i < 40)
-			threads.emplace_back(fn, num, base_coreid + i, false, i==0);
+			threads.emplace_back(fn, num, base_coreid + i, true, i==0);
 		else
-			threads.emplace_back(fn, num, base_coreid + i + 40, false, i==0);
+			threads.emplace_back(fn, num, base_coreid + i + 40, true, i==0);
 #else
-		threads.emplace_back(fn, num, base_coreid + i, false, i==0);
+		threads.emplace_back(fn, num, base_coreid + i, true, i==0);
 #endif
 		//threads.emplace_back(fn, num, base_coreid + i, true, i==0);
 	}
@@ -436,6 +436,9 @@ void RocksDBClient2::RocksDBWorker(uint64_t num, int coreid, bool is_warmup, boo
 	else
 #endif
 		offset = coreid;
+	// if (!is_warmup) {
+	// 	num = num * 5;
+	// }
 	for(uint64_t i=0; i<num; i++){
 		// if(!is_warmup && is_master && total_finished_requests_.load() > (request_num_ * completed_rate)){
 		// 	printf("...%.lf%%", total_finished_requests_.load()*1.0/request_num_ * 100);
@@ -490,12 +493,6 @@ void RocksDBClient2::RocksDBWorker(uint64_t num, int coreid, bool is_warmup, boo
 			throw utils::Exception("Operation request is not recognized!");
 		}
 		double time =  TIME_DURATION(start, TIME_NOW);
-		// if(Get_Record_Reset_Flag(coreid)){
-		// 	// printf("coreid: %d reset record!\n", coreid);
-		// 	Set_Record_Reset_Flag(coreid, false);
-		// 	printf("clear! \n");
-		// 	request_time.Clear();
-		// }
 		
 #ifdef USE_BLOCK
 		if(i % Granularity == 0)

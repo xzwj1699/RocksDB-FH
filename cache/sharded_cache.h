@@ -12,6 +12,7 @@
 #include <atomic>
 #include <cstdint>
 #include <string>
+#include <iostream>
 
 #include "port/lang.h"
 #include "port/port.h"
@@ -282,6 +283,23 @@ class ShardedCache : public ShardedCacheBase {
       const std::function<void(const CacheShard*)>& fn) const {
     uint32_t num_shards = GetNumShards();
     for (uint32_t i = 0; i < num_shards; i++) {
+      fn(shards_ + i);
+    }
+  }
+
+  inline void PrintForEachShard(const std::function<void(CacheShard*)>& fn) {
+    uint32_t num_shards = GetNumShards();
+    for (uint32_t i = 0; i < num_shards; i++) {
+      std::cout << "Shard " << i << std::endl;
+      fn(shards_ + i);
+    }
+  }
+
+  inline void PrintForEachShard(
+      const std::function<void(const CacheShard*)>& fn) const {
+    uint32_t num_shards = GetNumShards();
+    for (uint32_t i = 0; i < num_shards; i++) {
+      std::cout << "Shard " << i << std::endl;
       fn(shards_ + i);
     }
   }

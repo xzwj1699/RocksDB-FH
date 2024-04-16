@@ -40,7 +40,8 @@ int main(const int argc, const char *argv[]){
     
 	const bool cp_flag = (stoi(props.GetProperty("cp_flag")) != 0);
 	const int req = stoi(props.GetProperty("req"));
-	const int seg = stoi(props.GetProperty("seg"));
+	const int shard_bits = stoi(props.GetProperty("shard_bits"));
+	printf("Cache sharding bits = %d\n", shard_bits);
 	int async_num = 100;
 
 	//===================common-setting==========
@@ -71,7 +72,7 @@ int main(const int argc, const char *argv[]){
 	options.statistics = rocksdb::CreateDBStatistics();
 
 	options.max_total_wal_size =  (uint64_t)(buffer_size * (1ull << 30));
-	options.write_buffer_size = (uint64_t)(buffer_size * (1ull << 30)); //1ull << 32;
+	options.write_buffer_size = (uint64_t)(buffer_size * (1ull << 20)); //1ull << 32;
 
 	auto env = rocksdb::Env::Default();
 	options.env = env;
@@ -87,13 +88,13 @@ int main(const int argc, const char *argv[]){
 		// table_options.block_cache = rocksdb::NewLRUCache(150 * (1ull<<30));
 		options.table_factory.reset(rocksdb::NewBlockBasedTableFactory(table_options));
 	} else if (cache_type.compare("LRU_FH") == 0) {
-		auto cache = rocksdb::NewFHLRUCache(cache_size * (1ull<<30), 4, false, 0);
+		auto cache = rocksdb::NewFHLRUCache(cache_size * (1ull<<30), shard_bits, false, 0);
 		rocksdb::BlockBasedTableOptions table_options;
 		table_options.block_cache = cache;
 		auto table_factory = rocksdb::NewBlockBasedTableFactory(table_options);
 		options.table_factory.reset(table_factory);
 	} else {
-		auto cache = rocksdb::NewLRUCache(cache_size * (1ull<<30), 4, false, 0);
+		auto cache = rocksdb::NewLRUCache(cache_size * (1ull<<30), shard_bits, false, 0);
 		rocksdb::BlockBasedTableOptions table_options;
 		table_options.block_cache = cache;
 		auto table_factory = rocksdb::NewBlockBasedTableFactory(table_options);
@@ -205,7 +206,7 @@ void ParseCommandLine(int argc, const char *argv[], utils::Properties &props) {
 	props.SetProperty("req", argv[12]);
 
 	//13. seg num
-	props.SetProperty("seg", argv[13]);
+	props.SetProperty("shard_bits", argv[13]);
 
 	//14. cache type
 	props.SetProperty("cache_type", argv[14]);

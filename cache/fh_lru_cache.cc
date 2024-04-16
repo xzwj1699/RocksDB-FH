@@ -234,9 +234,7 @@ FHLRUCacheShard::FHLRUCacheShard(size_t capacity, bool strict_capacity_limit,
   lru_bottom_pri_ = &lru_;
   fh_lru_.next = &fh_lru_;
   fh_lru_.prev = &fh_lru_;
-  // printf("initialize FHLRU cache with capacity: %ld\n", capacity);
   SetCapacity(capacity);
-  // printf("FHLRUCacheShard init\n");
 }
 
 void FHLRUCacheShard::EraseUnRefEntries() {
@@ -567,7 +565,7 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
   FHLRUHandle* e = table_.Lookup(key, hash);
   if (e != nullptr) {
     assert(e->InCache());
-    if (!e->HasRefs()) {
+    if (!e->HasRefs() && !e->InFH()) {
       // The entry is in LRU since it's in hash and has no external
       // references.
       LRU_Remove(e);
@@ -866,25 +864,32 @@ bool FHLRUCacheShard::FindMarker() {
 bool FHLRUCacheShard::ConstructFromRatio(double ratio) {
   size_t lru_size = GetLRUelems();
   size_t lru_count = lru_size * ratio;
-  DMutexLock l(mutex_);
-  FHLRUHandle* old = lru_.prev;
-  for(size_t i = 0; i < lru_count; i++) {
-    assert(old != &lru_);
-    // FHLRUHandle* tmp = FH_table_.FH_Insert(old);
-    // assert(tmp == nullptr);
-    FH_table_.FH_Insert(old);
-    old->SetInFH(true);
-    old = old->prev;
+  {
+    DMutexLock l(mutex_);
+    FHLRUHandle* old = lru_.prev;
+    for(size_t i = 0; i < lru_count; i++) {
+      assert(old != &lru_);
+      // FHLRUHandle* tmp = FH_table_.FH_Insert(old);
+      // assert(tmp == nullptr);
+      // FH_table_.FH_Insert(old);
+      old->SetInFH(true);
+      old = old->prev;
+    }
+    fh_lru_.prev = lru_.prev;
+    lru_.prev->next = &fh_lru_;
+    fh_lru_.next = old->next;
+    old->next->prev = &fh_lru_;
+    lru_.prev = old;
+    old->next = &lru_;
+    lru_low_pri_ = lru_.prev;
+    lru_bottom_pri_ = lru_.prev;
   }
-  fh_lru_.prev = lru_.prev;
-  lru_.prev->next = &fh_lru_;
-  fh_lru_.next = old->next;
-  old->next->prev = &fh_lru_;
-  lru_.prev = old;
-  old->next = &lru_;
-
-  lru_low_pri_ = lru_.prev;
-  lru_bottom_pri_ = lru_.prev;
+  
+  for (auto p = fh_lru_.prev; p != &fh_lru_; p = p->prev) {
+    FH_table_.FH_Insert(p);
+    // p->SetInFH(true);
+  }
+  
   FH_ready = true;
 
   // printf("Construct insert count: %ld by %.2lf ratio and %ld size\n", lru_count, ratio, lru_size);
@@ -1205,6 +1210,7 @@ void FHLRUCache::FH_Scheduler() {
     construct_container.push(i);
   }
   int pass_count = 0;
+  std::cout << "[Debug] construct ratio: " << sleep_ratio << std::endl;
   while (FH_status && !construct_container.empty()) {
     size_t pass_len = construct_container.size();
     for(size_t i = 0; i < pass_len; i++) {
@@ -1258,7 +1264,12 @@ void FHLRUCache::FH_Scheduler() {
   while (FH_status && construct_container.size() != GetNumShards()) {
     count++;
     usleep(WAIT_DYNAMIC_SLEEP_INTERVAL_US);
-    // printf("check %d ", count);
+    // Print Cache shard's FH status
+    PrintForEachShard([baseline_performance](FHLRUCacheShard* cs) {
+      if (cs->FH_ready) {
+        cs->_print_FH();
+      }
+    });
     for(uint32_t i = 0; i < GetNumShards(); i++) {
       if(!construct_container.empty() && i == (uint32_t)construct_container.front()){
         construct_container.pop();
@@ -1266,15 +1277,15 @@ void FHLRUCache::FH_Scheduler() {
         continue;
       }
       auto cur_miss_ratio = GetShard(i)._get_FH_miss_ratio();
-      if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.5) {
-        // Indicate shard[i]'s performance is weaker than baseline
-        printf("shard %d hit ratio %lf is lower than baseline %lf, deconstruct\n", i, 1 - cur_miss_ratio, 1 - baseline_performance[i]);
-        fflush(stdout);
-        GetShard(i)._print_FH();
-        GetShard(i).Deconstruct();
-        GetShard(i)._reset_FH();
-        construct_container.push(i);
-      }
+      // if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.8) {
+      //   // Indicate shard[i]'s performance is weaker than baseline
+      //   printf("shard %d hit ratio %lf is lower than baseline %lf, deconstruct\n", i, 1 - cur_miss_ratio, 1 - baseline_performance[i]);
+      //   fflush(stdout);
+      //   GetShard(i)._print_FH();
+      //   GetShard(i).Deconstruct();
+      //   GetShard(i)._reset_FH();
+      //   construct_container.push(i);
+      // }
     }
   }
   // DECONSTRUCT:

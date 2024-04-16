@@ -167,7 +167,7 @@ struct FHLRUHandle : public Cache::Handle {
   uint32_t hash;
   // The number of external refs to this entry. The cache itself is not counted.
   std::atomic<uint32_t> refs;
-
+  std::atomic<uint32_t> hit_counts;
   // Mutable flags - access controlled by mutex
   // The m_ and M_ prefixes (and im_ and IM_ later) are to hopefully avoid
   // checking an M_ flag on im_flags or an IM_ flag on m_flags.
@@ -216,6 +216,30 @@ struct FHLRUHandle : public Cache::Handle {
     refs.fetch_sub(1);
     return refs.load() == 0;
   }
+
+  /**
+  * Item hit counts atomic external api definition
+  */
+
+  void AddCount() {
+    hit_counts.fetch_add(1);
+  }
+
+  int DecrementCount() {
+    if (hit_counts.load() == 0) return 0;
+    else {
+      hit_counts.fetch_sub(1);
+      return hit_counts.load();
+    }
+  }
+
+  void ClearHitCount() {
+    hit_counts.store(0);
+  }
+
+  /**
+  * End of atomic external api definition
+  */
 
   // Return true if there are external refs, false otherwise.
   bool HasRefs() const { return refs > 0; }
@@ -704,34 +728,34 @@ class FHLRUCache
   bool FH_status = true;
 
   // TODO: ??
-  bool FH_ready_record_reset_flag[100] = {false};
+  // bool FH_ready_record_reset_flag[100] = {false};
 
   // TODO: ??
-  size_t total_capacity;
+  // size_t total_capacity;
 
   // TODO: ??
-  int LARGE_GRANULARITY = 4000;
+  // int LARGE_GRANULARITY = 4000;
 
   // TODO: ??
-  double WAIT_STABLE_THRESHOLD = 0.005;
+  // double WAIT_STABLE_THRESHOLD = 0.005;
 
   // TODO: ??
   int WAIT_STABLE_SLEEP_INTERVAL_US = 1e6; // 1s
 
   // TODO: ??
-  int WAIT_MARKER_SLEEP_INTERVAL_US = 1e6; // 1s
+  // int WAIT_MARKER_SLEEP_INTERVAL_US = 1e6; // 1s
 
   // TODO: ??
   double QUERY_INTERVAL_US = 5e5; // 0.5s
 
   // TODO: ??
-  double WAIT_STABLE_QUERY_INTERVAL_US = 5e6; // 5s
+  // double WAIT_STABLE_QUERY_INTERVAL_US = 5e6; // 5s
 
   // TODO: ??
   double WAIT_DYNAMIC_SLEEP_INTERVAL_US = 3e6; // 3s
 
   // TODO: ??
-  double QUERY_STABLE_THRESHOLD = 0.03;
+  // double QUERY_STABLE_THRESHOLD = 0.03;
 
   // TODO: ??
   std::queue<int> construct_container;
