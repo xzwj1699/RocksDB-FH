@@ -9,6 +9,7 @@
 #pragma once
 
 #include <bits/stdint-uintn.h>
+#include <cstddef>
 #include <memory>
 #include <string>
 #include "random"
@@ -18,6 +19,7 @@
 #include "port/likely.h"
 #include "port/malloc.h"
 #include "port/port.h"
+#include "rocksdb/slice.h"
 #include "util/autovector.h"
 #include "util/distributed_mutex.h"
 
@@ -26,6 +28,12 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+
+#ifdef USE_FOLLY
+
+#include <folly/concurrency/ConcurrentHashMap.h>
+
+#endif
 
 #define GRANULARITY 100
 
@@ -184,7 +192,9 @@ struct FHLRUHandle : public Cache::Handle {
     // Whether this entry is in Frozen Part of FH Cache
     M_IN_FH = (1 << 4),
     // Whether this entry is a tomb (happened in user delete or LSM-tree compaction)
-    M_IS_TOMB = (1 << 5)
+    M_IS_TOMB = (1 << 5),
+    // Whether this entry has had any fh lookups (hits).
+    M_HAS_FH_HIT = (1 << 6)
   };
 
   // "Immutable" flags - only set in single-threaded context and then
@@ -237,6 +247,10 @@ struct FHLRUHandle : public Cache::Handle {
     hit_counts.store(0);
   }
 
+  uint32_t GetHitCount() {
+    return hit_counts.load();
+  }
+
   /**
   * End of atomic external api definition
   */
@@ -256,6 +270,7 @@ struct FHLRUHandle : public Cache::Handle {
 
   bool InFH() const { return m_flags & M_IN_FH; }
   bool IsTomb() const { return m_flags & M_IS_TOMB; }
+  bool HasFhHit() const { return m_flags & M_HAS_FH_HIT; }
 
   /** End of FronzenHot specific design **/
 
@@ -316,6 +331,14 @@ struct FHLRUHandle : public Cache::Handle {
     }
   }
 
+  void SetHasFhHit(bool has_hit) {
+    if (has_hit) {
+      m_flags |= M_HAS_FH_HIT;
+    } else {
+      m_flags &= ~M_HAS_FH_HIT;
+    }
+  }
+
   void SetIsTomb(bool is_tomb) {
     if (is_tomb) {
       m_flags |= M_IS_TOMB;
@@ -365,6 +388,10 @@ struct FHLRUHandle : public Cache::Handle {
   }
 };
 
+#ifdef USE_FOLLY
+
+#endif
+
 // We provide our own simple hash table since it removes a whole bunch
 // of porting hacks and is also faster than some of the built-in hash
 // table implementations in some of the compiler/runtime combinations
@@ -375,10 +402,14 @@ class FHLRUHandleTable {
   explicit FHLRUHandleTable(int max_upper_hash_bits, MemoryAllocator* allocator);
   ~FHLRUHandleTable();
 
-  // These three functions are designed for FH Cache
+  // These functions are designed for FH Cache
+  // Hash functions with "FH_" prefix preserve single writer and
+  // multi readers concurrency safety
   void Delete_Init();
   FHLRUHandle* FH_Lookup(const Slice& key, uint32_t hash);
   FHLRUHandle* FH_Insert(FHLRUHandle* h);
+  FHLRUHandle* FH_Remove(const Slice& key, uint32_t hash);
+  FHLRUHandle* FH_ReadLock();
 
   FHLRUHandle* Lookup(const Slice& key, uint32_t hash);
   FHLRUHandle* Insert(FHLRUHandle* h);
@@ -416,11 +447,16 @@ class FHLRUHandleTable {
   void Resize();
 
   // Resize function used in FH Cache
+  // This function is also concurrency safe
   void FH_Resize();
 
   // Number of hash bits (upper because lower bits used for sharding)
   // used for table index. Length == 1 << length_bits_
   int length_bits_;
+
+  // Atomic counter to indicate how many thread is 
+  // concurrently use this table_
+  std::atomic<uint32_t> use_count;
 
   // The table consists of an array of buckets where each bucket is
   // a linked list of cache entries that hash into the bucket.
@@ -500,6 +536,7 @@ class ALIGN_AS(CACHE_LINE_SIZE) FHLRUCacheShard final : public CacheShardBase {
   size_t GetOccupancyCount() const;
   size_t GetTableAddressCount() const;
   size_t GetLRUelems() const;
+  size_t GetFHLRUelems() const;
 
   void ApplyToSomeEntries(
       const std::function<void(const Slice& key, Cache::ObjectPtr value,
@@ -539,6 +576,12 @@ class ALIGN_AS(CACHE_LINE_SIZE) FHLRUCacheShard final : public CacheShardBase {
 
   // Construct FH Cache from a specific ratio
   bool ConstructFromRatio(double ratio);
+
+  // Construct FH Cache from a scan from lru_ head
+  bool ConstructFromScan();
+
+  // Remove invalid or cold item from fh_lru_
+  bool RemoveFromFH();
 
   // Deconstruct the FH cache
   void Deconstruct();
@@ -663,8 +706,11 @@ class ALIGN_AS(CACHE_LINE_SIZE) FHLRUCacheShard final : public CacheShardBase {
   FHLRUHandleTable table_;
 
   // Faster hashtable for FH Cache
+#ifdef USE_FOLLY
+  folly::ConcurrentHashMap<std::string, FHLRUHandle*> FH_table_;
+#else
   FHLRUHandleTable FH_table_;
-
+#endif
   // Memory size for entries residing in the cache.
   size_t usage_;
 
@@ -673,6 +719,9 @@ class ALIGN_AS(CACHE_LINE_SIZE) FHLRUCacheShard final : public CacheShardBase {
 
   // LRU elements number for entries residing only in the LRU list
   size_t lru_elems_;
+
+  // FH LRU elements number for entries residing on FH LRU list
+  size_t fh_lru_elems_;
 
   // Total lookup success count
   size_t _lookup_succ = 0;
@@ -718,6 +767,8 @@ class FHLRUCache
   bool FH_Get_Status();
 
   void FH_Scheduler();
+
+  void FH_New_Scheduler();
 
  private:
   /** Start of FrozenHot specific design **/

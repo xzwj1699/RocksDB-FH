@@ -2445,7 +2445,7 @@ checkout_folly:
 	if [ -e third-party/folly ]; then \
 		cd third-party/folly && ${GIT_COMMAND} fetch origin; \
 	else \
-		cd third-party && ${GIT_COMMAND} clone https://github.com/facebook/folly.git; \
+		cd third-party && ${GIT_COMMAND} clone git@github.com:facebook/folly.git; \
 	fi
 	@# Pin to a particular version for public CI, so that PR authors don't
 	@# need to worry about folly breaking our integration. Update periodically

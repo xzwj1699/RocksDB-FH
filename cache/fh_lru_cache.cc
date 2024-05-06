@@ -23,6 +23,7 @@
 #include <thread>
 #include <utility>
 
+#include "cache/lru_cache.h"
 #include "cache/secondary_cache_adapter.h"
 #include "monitoring/perf_context_imp.h"
 #include "monitoring/statistics_impl.h"
@@ -75,9 +76,12 @@ FHLRUHandle* FHLRUHandleTable::FH_Lookup(const Slice& key, uint32_t hash) {
 }
 
 FHLRUHandle* FHLRUHandleTable::FH_Insert(FHLRUHandle* h) {
-  FHLRUHandle** ptr = FH_FindPointer(h->key(), h->hash);
+  // FHLRUHandle** ptr = FH_FindPointer(h->key(), h->hash);
+  // FH insert handle h at the beginning of hash bucket
+  FHLRUHandle** ptr = &list_[h->hash >> (32 - length_bits_)];
   FHLRUHandle* old = *ptr;
-  h->next_fh_hash = (old == nullptr ? nullptr : old->next_fh_hash);
+  h->next_fh_hash = (old == nullptr ? nullptr : old);
+  // h->next_fh_hash = (old == nullptr ? nullptr : old->next_fh_hash);
   *ptr = h;
   if (old == nullptr) {
     ++elems_;
@@ -222,7 +226,11 @@ FHLRUCacheShard::FHLRUCacheShard(size_t capacity, bool strict_capacity_limit,
       low_pri_pool_ratio_(low_pri_pool_ratio),
       low_pri_pool_capacity_(0),
       table_(max_upper_hash_bits, allocator),
+#ifdef USE_FOLLY
+      FH_table_(0, 1 << max_upper_hash_bits),
+#else
       FH_table_(max_upper_hash_bits, allocator),
+#endif
       usage_(0),
       lru_usage_(0),
       mutex_(use_adaptive_mutex),
@@ -418,6 +426,7 @@ void FHLRUCacheShard::MaintainPoolSize() {
 void FHLRUCacheShard::EvictFromLRU(size_t charge,
                                  autovector<FHLRUHandle*>* deleted) {
   while ((usage_ + charge) > capacity_ && lru_.next != &lru_) {
+    // TODO: need to add some code to skip old in fh situation
     FHLRUHandle* old = lru_.next;
     // LRU list contains only elements which can be evicted.
     assert(old->InCache() && !old->HasRefs());
@@ -531,7 +540,6 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
                                  Cache::CreateContext* /*create_context*/,
                                  Cache::Priority /*priority*/,
                                  Statistics* /*stats*/) {
-  // auto t1 = std::chrono::steady_clock::now();
   if (status_iops)
     handle_req_num++;
   bool sample = RandomSample();
@@ -539,13 +547,24 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
   if (FH_ready) {
     // Fast path in FH Cache, no LRU_Remove hence no management overhead
   FH_Lookup:
+#ifdef USE_FOLLY
+    FHLRUHandle* e;
+    auto iter = FH_table_.find(key.ToString());
+    if (iter != FH_table_.end()) {
+      e = iter->second;
+    } else {
+      e = nullptr;
+    }
+#else
     FHLRUHandle* e = FH_table_.FH_Lookup(key, hash);
+#endif
     if (e != nullptr && !e->IsTomb()) {
       e->Ref();
+      e->SetHit();
+      e->SetHasFhHit(true);
+      e->AddCount();
       if (sample) {
         _fh_lookup_succ++;
-        // auto t2 = std::chrono::steady_clock::now();
-        // std::cout << "fh lookup succ latency: " << (t2 - t1).count() << std::endl;
       }
       return e;
     } else {
@@ -572,16 +591,16 @@ FHLRUHandle* FHLRUCacheShard::Lookup(const Slice& key, uint32_t hash,
     }
     e->Ref();
     e->SetHit();
+    // Add hit count for the entry
+    if (!e->InFH()) {
+      e->AddCount();
+    }
     if (sample) {
       _lookup_succ++;
-      // auto t3 = std::chrono::steady_clock::now();
-      // std::cout << "global lookup succ latency: " << (t3 - t1).count() << std::endl;
     }
   } else {
     if (sample) {
       _lookup_fail++;
-      // auto t4 = std::chrono::steady_clock::now();
-      // std::cout << "lookup fail latency: " << (t4 - t1).count() << std::endl;
     }
   }
   return e;
@@ -783,6 +802,11 @@ size_t FHLRUCacheShard::GetLRUelems() const {
   return lru_elems_;
 }
 
+size_t FHLRUCacheShard::GetFHLRUelems() const {
+  DMutexLock l(mutex_);
+  return fh_lru_elems_;
+}
+
 size_t FHLRUCacheShard::GetPinnedUsage() const {
   DMutexLock l(mutex_);
   assert(usage_ >= lru_usage_);
@@ -861,6 +885,108 @@ bool FHLRUCacheShard::FindMarker() {
   return e != nullptr;
 }
 
+bool FHLRUCacheShard::RemoveFromFH() {
+  // Scan from fh_lru_, and remove invalid and cold item
+  FHLRUHandle* old = fh_lru_.next;
+  int remove_upper_bounds = 10;
+  int cur_remove_count = 0;
+  while(old != &fh_lru_ && cur_remove_count < remove_upper_bounds) {
+    // This remove process should preserve concurrency safety
+    // The single writer will first remove items from fh_table_
+    // then move it to table_ if item is determined as cold
+    // or release it if item is determined as tomb
+    if (!old->HasFhHit() || old->GetHitCount() < 5) {
+#ifdef USE_FOLLY
+      auto iter = FH_table_.find(old->key().ToString());
+      // Remove from hot data list
+      FHLRUHandle* e = old->next;
+      old->next->prev = old->prev;
+      old->prev->next = old->next;
+      old->prev = old->next = nullptr;
+      if (iter != FH_table_.end()) {
+        DMutexLock l(mutex_);
+        if (iter->second->HasRefs()) {
+          LRU_Insert(iter->second);
+          iter->second->SetInFH(false);
+        }
+        FH_table_.erase(iter); 
+      }
+      old = e;
+      cur_remove_count++;
+#endif
+      // Remove from Frozen Cache, move to Cold Cache
+    } else if (old->IsTomb()) {
+      // Remove from Cache
+#ifdef USE_FOLLY
+      auto iter = FH_table_.find(old->key().ToString());
+      if (iter != FH_table_.end()) {
+        FHLRUHandle* e = old->next;
+        old->next->prev = old->prev;
+        old->prev->next = old->next;
+        old->prev = old->next = nullptr;
+        old = e;
+        {
+          DMutexLock l(mutex_);
+          table_.Remove(iter->second->key(), iter->second->hash);
+          usage_ -= iter->second->total_charge;
+        }
+        iter->second->Free(table_.GetAllocator());
+        FH_table_.erase(iter);
+      }
+      cur_remove_count++;
+#endif
+    } else {
+      old = old->next;
+    }
+  }
+  return true;
+}
+
+bool FHLRUCacheShard::ConstructFromScan() {
+  size_t lru_size = GetLRUelems();
+  size_t fh_lru_size = GetFHLRUelems();
+  // We put at most 90% entry in Frozen Cache
+  if (fh_lru_size >= lru_size * 0.9) return false;
+  // TODO: now we set scan length at a fixed value
+  // can be changed to more reasonable value
+  size_t scan_length = 10;
+  {
+    DMutexLock l(mutex_);
+    if (lru_.prev->GetHitCount() < 10) {
+      return false;
+    }
+    auto insert_hot_head = lru_.prev;
+    auto insert_old = lru_.prev;
+    for (size_t i = 0; i < scan_length && i < lru_size - fh_lru_size; i++) {
+      assert(insert_old != &lru_);
+      // We do not insert cold data into FH
+      // here cold data is defined as item hit less than 10 times
+      if (insert_old->GetHitCount() < 10) break;
+      insert_old->SetInFH(true);
+      insert_old = insert_old->prev;
+    }
+    auto insert_hot_tail = insert_old->next;
+    insert_old->next = &lru_;
+    lru_.prev = insert_old;
+    insert_hot_head->next = &fh_lru_;
+    insert_hot_tail->prev = fh_lru_.prev;
+    fh_lru_.prev->next = insert_hot_tail;
+    fh_lru_.prev = insert_hot_head;
+    lru_low_pri_ = lru_.prev;
+    lru_bottom_pri_ = lru_.prev;
+  }
+  for (auto p = fh_lru_.prev; p->GetHitCount() != 0; p = p->prev) {
+#ifdef USE_FOLLY
+    FH_table_.insert(p->key().ToString(), p);
+#else
+    FH_table_.FH_Insert(p);
+#endif
+    p->ClearHitCount();
+    fh_lru_elems_ += 1;
+  }
+  return true;
+}
+
 bool FHLRUCacheShard::ConstructFromRatio(double ratio) {
   size_t lru_size = GetLRUelems();
   size_t lru_count = lru_size * ratio;
@@ -886,7 +1012,11 @@ bool FHLRUCacheShard::ConstructFromRatio(double ratio) {
   }
   
   for (auto p = fh_lru_.prev; p != &fh_lru_; p = p->prev) {
+#ifdef USE_FOLLY
+  FH_table_.insert(p->key().ToString(), p);
+#else
     FH_table_.FH_Insert(p);
+#endif
     // p->SetInFH(true);
   }
   
@@ -914,7 +1044,11 @@ bool FHLRUCacheShard::ConstructFromMarker() {
   while (old != &fh_lru_) {
     // FHLRUHandle *tmp = FH_table_.FH_Insert(old);
     // assert(tmp == nullptr);
+#ifdef USE_FOLLY
+    FH_table_.insert(old->key().ToString(), old);
+#else
     FH_table_.FH_Insert(old);
+#endif
     old->SetInFH(true);
     old = old->next;
     count++;
@@ -954,6 +1088,7 @@ void FHLRUCacheShard::Deconstruct() {
       old->next->prev = old->prev;
       old->prev->next = old->next;
       old->prev = old->next = nullptr; // can be omitted
+      table_.Remove(old->key(), old->hash); // Remove this entry from table_
       last_reference_list.push_back(old);
       old = e;
     }
@@ -976,7 +1111,11 @@ void FHLRUCacheShard::Deconstruct() {
   for (auto entry : last_reference_list) {
     entry->Free(table_.GetAllocator());
   }
+#ifdef USE_FOLLY
+  FH_table_.clear();
+#else  
   FH_table_.Delete_Init();
+#endif
 }
 
 inline double FHLRUCacheShard::_get_reset_miss_ratio() {
@@ -1000,7 +1139,7 @@ inline double FHLRUCacheShard::_get_miss_ratio() {
 }
 
 inline double FHLRUCacheShard::_get_FH_miss_ratio() {
-  double tmp;
+  // double tmp;
   auto total = _lookup_fail + _lookup_succ + _fh_lookup_succ;
   return (total - _fh_lookup_succ) * 1.0 / total;
 }
@@ -1045,7 +1184,7 @@ FHLRUCache::FHLRUCache(const FHLRUCacheOptions& opts) : ShardedCache(opts) {
                            /* max_upper_hash_bits */ 32 - opts.num_shard_bits,
                            alloc, &eviction_callback_);
   });
-  std::thread new_thread(&FHLRUCache::FH_Scheduler, this);
+  std::thread new_thread(&FHLRUCache::FH_New_Scheduler, this);
   thd_vec.push_back(std::move(new_thread));
 }
 
@@ -1103,6 +1242,39 @@ Learning_Input_Node FHLRUCacheShard::learning_machine(Learning_Input_Node last_s
       learning_container = std::priority_queue<Learning_Result_Node, std::vector<Learning_Result_Node>, FH_cmp>();
       return Learning_Input_Node(todo_node.ratio_, 0); // end
     }
+  }
+}
+
+void FHLRUCache::FH_New_Scheduler() {
+  // int count = 0;
+  WAIT_STABLE:
+  double miss_ratio = 0;
+  size_t last_usage = 0, usage;
+  while (FH_status) {
+    miss_ratio = GetShard(0)._get_reset_miss_ratio();
+    usage = GetShard(0).GetUsage();
+    if (last_usage < usage) {
+      last_usage = usage;
+      usleep(WAIT_STABLE_SLEEP_INTERVAL_US);
+    } else {
+      break;
+    }
+  }
+  if(miss_ratio > 0.55){
+    goto WAIT_STABLE;
+  }
+  // First set each shard FH_ready == true
+  ForEachShard([](FHLRUCacheShard* cs) {
+    cs->FH_ready = true;
+  });
+  // Scan from lru_head
+  while (FH_status) {
+    ForEachShard([](FHLRUCacheShard* cs) {
+      cs->ConstructFromScan();
+    });
+    ForEachShard([](FHLRUCacheShard* cs) {
+      cs->RemoveFromFH();
+    });
   }
 }
 
@@ -1277,15 +1449,15 @@ void FHLRUCache::FH_Scheduler() {
         continue;
       }
       auto cur_miss_ratio = GetShard(i)._get_FH_miss_ratio();
-      // if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.8) {
-      //   // Indicate shard[i]'s performance is weaker than baseline
-      //   printf("shard %d hit ratio %lf is lower than baseline %lf, deconstruct\n", i, 1 - cur_miss_ratio, 1 - baseline_performance[i]);
-      //   fflush(stdout);
-      //   GetShard(i)._print_FH();
-      //   GetShard(i).Deconstruct();
-      //   GetShard(i)._reset_FH();
-      //   construct_container.push(i);
-      // }
+      if (1 - cur_miss_ratio < (1 - baseline_performance[i]) * 0.8) {
+        // Indicate shard[i]'s performance is weaker than baseline
+        printf("shard %d hit ratio %lf is lower than baseline %lf, deconstruct\n", i, 1 - cur_miss_ratio, 1 - baseline_performance[i]);
+        fflush(stdout);
+        GetShard(i)._print_FH();
+        GetShard(i).Deconstruct();
+        GetShard(i)._reset_FH();
+        construct_container.push(i);
+      }
     }
   }
   // DECONSTRUCT:

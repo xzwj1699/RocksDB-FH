@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core/workload_proxy.h"
-#include "core/core_workload.h"
+#include "workload_proxy.h"
+#include "core_workload.h"
 #include "chrono"
 
 namespace ycsbc{

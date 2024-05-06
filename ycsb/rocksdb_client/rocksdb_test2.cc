@@ -4,8 +4,8 @@
 #include "cmath"
 #include <sys/vfs.h> 
 #include "rocksdb/table.h"
-#include "core/properties.h"
-#include "core/utils.h"
+#include "properties.h"
+#include "utils.h"
 // #include "table/block_based/block_based_table_factory.h"
 
 void ParseCommandLine(int argc, const char *argv[], utils::Properties &props);
@@ -125,7 +125,7 @@ int main(const int argc, const char *argv[]){
 		fflush(stdout);
 		printf("--------------memory usage----------------\n");
 		fflush(stdout);
-		system("free -h");
+		auto res = system("free -h");
 		fflush(stdout);
 		printf("------------------------------------------\n");
 		fflush(stdout);
@@ -222,7 +222,7 @@ void CheckArgs(utils::Properties &props){
 void PrintWorkload(const char* filename){
 	FILE *file = fopen(filename, "r");
 	char line[201];
-	fgets(line,200,file);
+	auto x = fgets(line,200,file);
 	printf("==================Workload=================\n");
 	printf("%s\n", filename);
 	while(!feof(file)){
@@ -230,7 +230,7 @@ void PrintWorkload(const char* filename){
 		if(s.find("#") != 0 && s != "\n" && s!=""){
 			printf("%s", s.c_str());
 		}
-		fgets(line,200,file);
+		auto y = fgets(line,200,file);
 	}
 	fclose(file);
 	printf("==========================================\n");

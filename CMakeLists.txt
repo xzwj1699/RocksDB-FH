@@ -86,7 +86,6 @@ if(MSVC)
   option(WITH_GFLAGS "build with GFlags" OFF)
   option(WITH_XPRESS "build with windows built in compression" OFF)
   option(ROCKSDB_SKIP_THIRDPARTY "skip thirdparty.inc" OFF)
-
   if(NOT ROCKSDB_SKIP_THIRDPARTY)
     include(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty.inc)
   endif()
@@ -125,6 +124,7 @@ else()
       find_package(gflags REQUIRED)
       set(GFLAGS_LIB gflags::gflags)
     endif()
+    
     include_directories(${GFLAGS_INCLUDE_DIR})
     list(APPEND THIRDPARTY_LIBS ${GFLAGS_LIB})
     add_definitions(-DGFLAGS=1)
@@ -578,7 +578,17 @@ if(USE_FOLLY)
   endif()
   set(ROCKSDB_BUILD_SHARED OFF)
   set(GFLAGS_SHARED FALSE)
-  find_package(folly)
+
+  find_package(gflags CONFIG REQUIRED)
+  # set_target_properties(gflags PROPERTIES
+  #         MAP_IMPORTED_CONFIG_DEBUG Release
+  # )
+  
+  # find_package(folly CONFIG REQUIRED)
+  message(STATUS ${FOLLY_LIBRARIES})
+  message(STATUS ${FOLLY_INST_PATH})
+  # message(STATUS ${GFLAGS_LIBRARIES})
+  
   # If cmake could not find the folly-config.cmake file, fall back
   # to looking in third-party/folly for folly and its dependencies
   if(NOT FOLLY_LIBRARIES)
@@ -613,6 +623,8 @@ endif()
 find_package(Threads REQUIRED)
 
 # Main library source code
+
+link_directories(/tmp/fbcode_builder_getdeps-ZhomeZcqyZqemu-isoZzhangjuncheng.zjcZRocksDB-fhZthird-partyZfollyZbuildZfbcode_builder/installed/folly/lib/)
 
 set(SOURCES
         cache/cache.cc
@@ -1523,6 +1535,15 @@ if(WITH_TESTS)
   endif()
 endif()
 
+set(GFLAGS_LIB gflags)
+
+SET(YCSB_SRC_LIST ycsb/rocksdb_client/rocksdb_test2.cc ycsb/rocksdb_client/rocksdb_client2.cc ycsb/core/core_workload.cc)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/ycsb/core)
+add_executable(
+  rocksdb_test2
+  ${YCSB_SRC_LIST}
+)
+target_link_libraries(rocksdb_test2 ${ROCKSDB_LIB} ${GFLAGS_LIB} ${FOLLY_LIBS})
 if(WITH_BENCHMARK_TOOLS)
   add_executable(db_bench${ARTIFACT_SUFFIX}
     tools/simulated_hybrid_file_system.cc
@@ -1569,6 +1590,8 @@ if(WITH_TRACE_TOOLS)
     tools/block_cache_analyzer/block_cache_trace_analyzer_tool.cc)
   target_link_libraries(block_cache_trace_analyzer${ARTIFACT_SUFFIX}
     ${ROCKSDB_LIB} ${GFLAGS_LIB} ${FOLLY_LIBS})
+  message(STATUS "--------------")
+  message(STATUS ${GFLAGS_LIB})
 
   add_executable(trace_analyzer${ARTIFACT_SUFFIX}
     tools/trace_analyzer.cc)

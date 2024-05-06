@@ -398,11 +398,13 @@ void RocksDBClient2::FH_Set_Status(bool status) {
 bool RocksDBClient2::FH_Get_Status(){
 	// std::shared_ptr<rocksdb::Cache> block_cache = reinterpret_cast<rocksdb::BlockBasedTableOptions*>(options_.table_factory->GetOptions())->block_cache;
 	// return block_cache->FH_Get_Status();
+	return true;
 }
 
 bool RocksDBClient2::Get_Record_Reset_Flag(int coreid){
 	// std::shared_ptr<rocksdb::Cache> block_cache = reinterpret_cast<rocksdb::BlockBasedTableOptions*>(options_.table_factory->GetOptions())->block_cache;
 	// return block_cache->Get_Record_Reset_Flag(coreid);
+	return true;
 }
 
 void RocksDBClient2::Set_Record_Reset_Flag(int coreid, bool status){
@@ -427,7 +429,7 @@ void RocksDBClient2::RocksDBWorker(uint64_t num, int coreid, bool is_warmup, boo
 	// double completed_rate = 0.1;
 	std::string w_value(1024, 'a');
 	std::string r_value;
-	auto last_time = TIME_NOW;
+	// auto last_time = TIME_NOW;
 	
 	int offset;
 #ifdef NUMA_O
@@ -483,7 +485,7 @@ void RocksDBClient2::RocksDBWorker(uint64_t num, int coreid, bool is_warmup, boo
 		}else if(opt == SCAN){
 			rocksdb::Iterator* iter = db_->NewIterator(read_options_);
 			iter->Seek(req->Key());
-			for (int i = 0; i < req->Length() && iter->Valid(); i++) {
+			for (int j = 0; j < req->Length() && iter->Valid(); j++) {
 				// Do something with it->key() and it->value().
         		iter->Next();
     		}

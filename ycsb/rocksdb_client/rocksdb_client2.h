@@ -20,7 +20,7 @@
 #include "sys/syscall.h"
 #include "unistd.h"
 
-#include "core/workloadwrapper.h"
+#include "workloadwrapper.h"
 
 #include <sys/time.h>
 #include <cassert>
@@ -73,10 +73,10 @@ class RocksDBClient2{
 		const int loader_threads_;
 		const uint64_t load_num_;
 		const int worker_threads_;
-		const uint64_t request_num_;
-		const int async_num_;
 		//const double warmup_rate_ = 1.0/10;
-		const uint64_t warmup_num_;
+		uint64_t warmup_num_ = 0;
+		uint64_t request_num_ = 0;
+		int async_num_ = 0;
 		//const double warmup_rate_ = 1;
 
 		WorkloadWrapper *workload_wrapper_ = nullptr;
